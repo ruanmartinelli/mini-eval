@@ -1,0 +1,53 @@
+{
+  "name": "mini-eval",
+  "version": "0.1.0",
+  "description": "A tiny, code-first LLM-eval framework: it owns the loop, the report, and an instrumented model caller — you own the pipeline.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "example:extraction": "tsx examples/extraction.eval.ts",
+    "example:rate-shopping": "tsx examples/rate-shopping.eval.ts"
+  },
+  "keywords": [
+    "llm",
+    "eval",
+    "evaluation",
+    "scorer",
+    "judge",
+    "ai-sdk"
+  ],
+  "author": "Ruan Martinelli",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@openrouter/agent": "^0.7.2",
+    "@openrouter/sdk": "^0.13.7",
+    "@types/node": "^22.0.0",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 150,
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "semi": false
+  }
+}
