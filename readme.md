@@ -1,8 +1,6 @@
 # mini-eval
 
-A tiny, code-first framework for evaluating LLM-powered systems. Hand it your
-system as a function plus some scorers; it sweeps models, runs every case, scores
-the output, and returns a report.
+A tiny, code-first framework for evaluating LLM-powered systems.
 
 ## Install
 
