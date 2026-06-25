@@ -83,72 +83,89 @@ console.log(report) // { byModel: { 'openai/gpt-4o-mini': { ... } }
 
 ### `evaluate(name, config)`
 
+Sweeps every model, runs the task per case, scores the output, and resolves to a report.
+
 ```ts
 evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E>): Promise<EvalReport<O>>
 ```
 
-Sweeps `config.models`, runs the task per case, scores the output, and returns
-the report. A case whose task throws is recorded with `output: null` and never
-aborts the run; a scorer that throws scores 0 with the error in its `reason`.
+`EvalConfig<I, O, E>`:
 
-**`EvalConfig<I, O, E>`**
+| field         | type                                          | notes                       |
+| ------------- | --------------------------------------------- | --------------------------- |
+| `data`        | `Case<I, E>[]` or `() => Promise<Case[]>`     | test cases, or an async factory |
+| `scorers`     | `Scorer<I, O, E>[]`                           | one or more scorers         |
+| `models`      | `string[]`                                    | swept comparison axis; at least one |
+| `task`        | `Task<I, O>`                                  | the system under test       |
+| `concurrency` | `number`                                      | accepted, not yet honored   |
+| `baseline`    | `string`                                      | accepted, not yet honored   |
 
-| field     | type                                      | notes                                    |
-| --------- | ----------------------------------------- | ---------------------------------------- |
-| `data`    | `Case<I, E>[]` or `() => Promise<Case[]>` | test cases, or an async factory          |
-| `scorers` | `Scorer<I, O, E>[]`                       | one or more scorers                      |
-| `models`  | `string[]`                                | the swept comparison axis (at least one) |
-| `task`    | `Task<I, O>`                              | the system under test                    |
-
-(`concurrency` and `baseline` are also accepted but not yet honored — see below.)
-A `Case<I, E>` is `{ input: I; expected?: E; tags?: string[] }`; `expected` and
-`tags` are optional, so a case can assert just one field and stay silent on the rest.
-
-**`Task<I, O>`**
-
-```ts
-type Task<I, O> = (input: I, ctx: { model: string; report: (usage: Usage) => void }) => Promise<O>
-```
-
-The task calls your model client against `ctx.model` and calls `ctx.report(usage)`
-per call (counts as task spend). `Usage` is `{ inputTokens, outputTokens, costUsd? }`.
-
-**`EvalReport<O>`**
-
-```ts
-{
-  name: string
-  byModel: {
-    [model: string]: {
-      overall: number                              // mean case score
-      byTag: Record<string, number>                // mean score per tag
-      cost: { taskUsd: number; judgeUsd: number }  // summed from reported usage
-      latency: { p50Ms: number; p95Ms: number }    // task wall-clock
-      cases: CaseResult<O>[]
-    }
-  }
-}
-```
+A `Case<I, E>` is `{ input: I; expected?: E; tags?: string[] }` — `expected` and
+`tags` are optional, so a case can pin just one field and stay silent on the rest.
 
 ### `scorer(name, run, opts?)`
 
+Builds a named scorer. `run` is called once per case and may be sync or async.
+
 ```ts
-scorer<I, O, E>(name: string, run: (ctx) => ScoreValue | Promise<ScoreValue>, opts?: { weight?: number })
+scorer<I, O, E>(
+  name: string,
+  run: (ctx: ScorerCtx<I, O, E>) => ScoreValue | Promise<ScoreValue>,
+  opts?: { weight?: number },   // relative weight in the case mean; default 1
+): Scorer<I, O, E>
 ```
 
-`run` receives `{ input, output, expected, tags, report }` and returns a
-`ScoreValue`:
+`run` receives `ScorerCtx` `{ input, output, expected?, tags, report }` and returns a `ScoreValue`:
 
 ```ts
 type ScoreValue =
-  | number // score in [0,1]
+  | number                              // score in [0,1]
   | { score: number; reason?: string } // score + why it scored low
-  | null // not applicable — excluded from the case's weighted mean
+  | null                                // not applicable — excluded from the case mean
 ```
 
-`weight` (default `1`) sets how much the scorer counts in the case's weighted
-mean. A scorer that calls a model is a judge — there is no separate judge
-concept; report its usage via `ctx.report` to count it as judge spend.
+A scorer that calls a model is a judge — `report` its usage to count it as judge spend.
+
+### `Task<I, O>`
+
+The system under test: maps an input to an output via one or more model calls.
+Route your call to `ctx.model`, and `ctx.report(usage)` each call to count it as task spend.
+
+```ts
+type Task<I, O> = (input: I, ctx: TaskCtx) => Promise<O>
+
+type TaskCtx = { model: string; report: (usage: Usage) => void }
+type Usage = { inputTokens: number; outputTokens: number; costUsd?: number }
+```
+
+### `EvalReport<O>`
+
+Keyed by model id, so you can diff models on the same axes.
+
+```ts
+type EvalReport<O> = { name: string; byModel: Record<string, ModelReport<O>> }
+```
+
+`ModelReport<O>`:
+
+| field     | type                              | notes                          |
+| --------- | --------------------------------- | ------------------------------ |
+| `overall` | `number`                          | mean case score                |
+| `byTag`   | `Record<string, number>`          | mean score per tag             |
+| `cost`    | `{ taskUsd, judgeUsd }`           | summed from reported usage     |
+| `latency` | `{ p50Ms, p95Ms }`                | task wall-clock percentiles    |
+| `cases`   | `CaseResult<O>[]`                 | per-case detail                |
+
+`CaseResult<O>`:
+
+| field       | type                                                          | notes                              |
+| ----------- | ------------------------------------------------------------ | ---------------------------------- |
+| `tags`      | `string[]`                                                   | the case's tags                    |
+| `output`    | `O \| null`                                                 | `null` if the task threw           |
+| `score`     | `number`                                                     | weighted mean over applicable scorers |
+| `scores`    | `Array<{ name, score, weight, reason }>`                     | per-scorer breakdown               |
+| `usage`     | `{ task: Usage; judge: Usage }`                             | task and judge spend, kept separate |
+| `latencyMs` | `number`                                                     | task wall-clock latency            |
 
 ## License
 
