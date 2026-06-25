@@ -1,3 +1,5 @@
 node_modules
 .env
 dist
+report-example.html
+html.ts

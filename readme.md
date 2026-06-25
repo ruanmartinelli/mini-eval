@@ -89,83 +89,46 @@ Sweeps every model, runs the task per case, scores the output, and resolves to a
 evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E>): Promise<EvalReport<O>>
 ```
 
-`EvalConfig<I, O, E>`:
-
-| field         | type                                          | notes                       |
-| ------------- | --------------------------------------------- | --------------------------- |
-| `data`        | `Case<I, E>[]` or `() => Promise<Case[]>`     | test cases, or an async factory |
-| `scorers`     | `Scorer<I, O, E>[]`                           | one or more scorers         |
-| `models`      | `string[]`                                    | swept comparison axis; at least one |
-| `task`        | `Task<I, O>`                                  | the system under test       |
-| `concurrency` | `number`                                      | accepted, not yet honored   |
-| `baseline`    | `string`                                      | accepted, not yet honored   |
-
-A `Case<I, E>` is `{ input: I; expected?: E; tags?: string[] }` — `expected` and
-`tags` are optional, so a case can pin just one field and stay silent on the rest.
+| option        | type                                      | notes                              |
+| ------------- | ----------------------------------------- | ---------------------------------- |
+| `data`        | `Case<I, E>[]` or `() => Promise<Case[]>` | test cases, or an async factory    |
+| `scorers`     | `Scorer<I, O, E>[]`                       | one or more scorers                |
+| `models`      | `string[]`                                | models to sweep; at least one      |
+| `task`        | `Task<I, O>`                              | the system under test              |
+| `concurrency` | `number`                                  | optional; accepted, not yet honored |
+| `baseline`    | `string`                                  | optional; accepted, not yet honored |
 
 ### `scorer(name, run, opts?)`
 
 Builds a named scorer. `run` is called once per case and may be sync or async.
 
 ```ts
-scorer<I, O, E>(
-  name: string,
-  run: (ctx: ScorerCtx<I, O, E>) => ScoreValue | Promise<ScoreValue>,
-  opts?: { weight?: number },   // relative weight in the case mean; default 1
-): Scorer<I, O, E>
+scorer<I, O, E>(name: string, run, opts?: { weight?: number }): Scorer<I, O, E>
 ```
 
-`run` receives `ScorerCtx` `{ input, output, expected?, tags, report }` and returns a `ScoreValue`:
+| param         | type                                          | notes                                                                |
+| ------------- | --------------------------------------------- | -------------------------------------------------------------------- |
+| `name`        | `string`                                      | scorer name, shown in the report                                     |
+| `run`         | `(ctx) => ScoreValue \| Promise<ScoreValue>`  | scores one case; returns a number in [0,1], `{ score, reason }`, or `null` to skip |
+| `opts.weight` | `number`                                      | optional; relative weight in the case mean (default 1)               |
+
+A scorer that calls a model is a judge: report its usage to count it as judge spend.
+
+### `renderHtml(report)`
+
+Renders a report as a self-contained HTML page. Returns the HTML as a string.
 
 ```ts
-type ScoreValue =
-  | number                              // score in [0,1]
-  | { score: number; reason?: string } // score + why it scored low
-  | null                                // not applicable — excluded from the case mean
+renderHtml(report: EvalReport): string
 ```
-
-A scorer that calls a model is a judge — `report` its usage to count it as judge spend.
-
-### `Task<I, O>`
-
-The system under test: maps an input to an output via one or more model calls.
-Route your call to `ctx.model`, and `ctx.report(usage)` each call to count it as task spend.
 
 ```ts
-type Task<I, O> = (input: I, ctx: TaskCtx) => Promise<O>
+import { evaluate, renderHtml } from 'mini-eval'
+import { writeFileSync } from 'node:fs'
 
-type TaskCtx = { model: string; report: (usage: Usage) => void }
-type Usage = { inputTokens: number; outputTokens: number; costUsd?: number }
+const report = await evaluate('extraction', { /* ... */ })
+writeFileSync('report.html', renderHtml(report))
 ```
-
-### `EvalReport<O>`
-
-Keyed by model id, so you can diff models on the same axes.
-
-```ts
-type EvalReport<O> = { name: string; byModel: Record<string, ModelReport<O>> }
-```
-
-`ModelReport<O>`:
-
-| field     | type                              | notes                          |
-| --------- | --------------------------------- | ------------------------------ |
-| `overall` | `number`                          | mean case score                |
-| `byTag`   | `Record<string, number>`          | mean score per tag             |
-| `cost`    | `{ taskUsd, judgeUsd }`           | summed from reported usage     |
-| `latency` | `{ p50Ms, p95Ms }`                | task wall-clock percentiles    |
-| `cases`   | `CaseResult<O>[]`                 | per-case detail                |
-
-`CaseResult<O>`:
-
-| field       | type                                                          | notes                              |
-| ----------- | ------------------------------------------------------------ | ---------------------------------- |
-| `tags`      | `string[]`                                                   | the case's tags                    |
-| `output`    | `O \| null`                                                 | `null` if the task threw           |
-| `score`     | `number`                                                     | weighted mean over applicable scorers |
-| `scores`    | `Array<{ name, score, weight, reason }>`                     | per-scorer breakdown               |
-| `usage`     | `{ task: Usage; judge: Usage }`                             | task and judge spend, kept separate |
-| `latencyMs` | `number`                                                     | task wall-clock latency            |
 
 ## License
 
