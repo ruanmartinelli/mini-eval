@@ -4,13 +4,6 @@ import { to } from './utils.js'
 import { aggregate } from './aggregate.js'
 import { report } from './usage.js'
 
-/** Accumulate a reported call's usage into a running total. */
-function addUsage(acc: Usage, u: Usage): void {
-  acc.inputTokens += u.inputTokens
-  acc.outputTokens += u.outputTokens
-  if (u.costUsd != null) acc.costUsd = (acc.costUsd ?? 0) + u.costUsd
-}
-
 /**
  * Sweeps `config.models`, runs the task on each case, scores the output, and
  * aggregates per model. A case whose task throws is recorded with `output: null`

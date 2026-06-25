@@ -1,12 +1,5 @@
 import type { CaseResult, ModelReport } from './types.js'
-
-/** The p-th percentile (nearest-rank) of `values`, or 0 when empty. */
-function percentile(values: number[], p: number): number {
-  if (values.length === 0) return 0
-  const sorted = [...values].sort((a, b) => a - b)
-  const idx = Math.min(sorted.length, Math.max(1, Math.ceil((p / 100) * sorted.length))) - 1
-  return sorted[idx] ?? 0
-}
+import { percentile } from './utils.js'
 
 /**
  * Aggregate a model's per-case results into its {@link ModelReport}: overall and

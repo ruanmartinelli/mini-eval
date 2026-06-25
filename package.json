@@ -33,6 +33,12 @@
   ],
   "author": "Ruan Martinelli",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruanmartinelli/mini-eval.git"
+  },
+  "homepage": "https://github.com/ruanmartinelli/mini-eval#readme",
+  "bugs": "https://github.com/ruanmartinelli/mini-eval/issues",
   "devDependencies": {
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",

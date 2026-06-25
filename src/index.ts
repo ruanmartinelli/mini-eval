@@ -5,6 +5,7 @@ export { scorer } from "./scorer.js";
 
 export { aggregate } from "./aggregate.js";
 export { loadBaseline, gate } from "./gate.js";
+export { renderHtml } from "./report-html.js";
 
 export type {
   Case,
