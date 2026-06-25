@@ -1,6 +1,6 @@
 # mini-eval
 
-A tiny, code-first framework for evaluating LLM-powered systems.
+A tiny library for evaluating LLM-powered systems.
 
 ## Install
 
