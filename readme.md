@@ -54,10 +54,10 @@ const task: Task<string, Address> = async (input, ctx) => {
 An evaluation is a function that takes a name and a configuration, and returns a report.
 
 ```ts
-import { evaluate } from 'mini-eval'
+import { evaluate, scorer } from 'mini-eval'
 
-const task = /* ... */
-const zip = /* ... */
+const task = () => { /* ... */ }
+const zip = scorer(/* ... */)
 
 const models = ['openai/gpt-4o-mini', 'anthropic/claude-3.5-haiku']
 const scorers = [zip]
@@ -76,7 +76,7 @@ const report = await evaluate<string, Address, Partial<Address>>('extraction', {
   ],
 })
 
-report.byModel['openai/gpt-4o-mini']?.overall // → number in [0,1]
+console.log(report) // { byModel: { 'openai/gpt-4o-mini': { ... } }
 ```
 
 ## API
@@ -150,17 +150,6 @@ type ScoreValue =
 mean. A scorer that calls a model is a judge — there is no separate judge
 concept; report its usage via `ctx.report` to count it as judge spend.
 
-### Other exports
-
-`aggregate`, `loadBaseline`, `gate`, and the types (`Case`, `Scorer`, `Task`,
-`Usage`, `EvalConfig`, `EvalReport`, …). See [`src/types.ts`](src/types.ts) for
-the full set.
-
-## Not yet implemented
-
-- **`gate` / `loadBaseline`** — baseline comparison for CI gating.
-- **`concurrency`** — accepted in config but not honored; cases run serially.
-
 ## License
 
-MIT — see [LICENSE](LICENSE).
+[MIT](LICENSE).
