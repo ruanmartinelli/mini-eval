@@ -18,9 +18,7 @@
     "build": "npm run clean && tsc -p tsconfig.build.json",
     "clean": "rm -rf dist",
     "prepare": "npm run build",
-    "typecheck": "tsc --noEmit",
-    "example:extraction": "tsx examples/extraction.eval.ts",
-    "example:rate-shopping": "tsx examples/rate-shopping.eval.ts"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "llm",
