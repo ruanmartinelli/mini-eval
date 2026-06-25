@@ -2,8 +2,7 @@ import assert from 'node:assert'
 import type { CaseResult, EvalConfig, EvalReport, Usage } from './types.js'
 import { to } from './utils.js'
 import { aggregate } from './aggregate.js'
-
-const zeroUsage = (): Usage => ({ inputTokens: 0, outputTokens: 0 })
+import { report } from './usage.js'
 
 /** Accumulate a reported call's usage into a running total. */
 function addUsage(acc: Usage, u: Usage): void {
@@ -44,26 +43,45 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
       const input = c.input
       const expected = c.expected
 
-      // Usage is reported by the caller: the task reports task spend, a judge
-      // scorer reports judge spend.
-      const usage = { task: zeroUsage(), judge: zeroUsage() }
+      const usage: { task: Usage; judge: Usage } = {
+        task: { inputTokens: 0, outputTokens: 0 },
+        judge: { inputTokens: 0, outputTokens: 0 },
+      }
 
       const start = performance.now()
-      const [error, result] = await to(task(input, { model, report: u => addUsage(usage.task, u) }))
+      const [error, result] = await to(
+        task(input, {
+          model,
+          report: usg => report(usage.task, usg),
+        }),
+      )
       const latencyMs = performance.now() - start
 
       if (error) {
-        results.push({ tags, output: null, score: 0, scores: [], usage, latencyMs })
+        results.push({
+          tags,
+          usage,
+          latencyMs,
+          score: 0,
+          scores: [],
+          output: null,
+        })
+
         continue
       }
 
       const output = result!
-
       const scores: CaseResult<O>['scores'] = []
 
       for (const scorer of scorers) {
         try {
-          const value = await scorer.run({ input, output, expected, tags, report: u => addUsage(usage.judge, u) })
+          const value = await scorer.run({
+            input,
+            output,
+            expected,
+            tags,
+            report: usg => report(usage.judge, usg),
+          })
 
           if (value === null) continue
           const normalized = typeof value === 'number' ? { score: value, reason: '' } : value

@@ -5,81 +5,79 @@ A tiny, code-first framework for evaluating LLM-powered systems.
 ## Install
 
 ```bash
-npm install
-```
-
-mini-eval never calls a model itself. You write a `task` that calls your own
-client and reports usage via `ctx.report`. The examples include a ready-made
-OpenRouter helper ([`examples/openrouter-caller.ts`](examples/openrouter-caller.ts))
-— copy it or write your own. To run them, set its key:
-
-```bash
-cp .env.example .env   # then fill in OPENROUTER_API_KEY
+npm install mini-eval
 ```
 
 ## Quickstart
 
+### 1. Create a scorer
+
+A scorer is a function that takes an input, output, and expected output, and returns a score.
+
 ```ts
-import { z } from 'zod'
-import { evaluate, scorer } from 'mini-eval'
-import { callModel } from './openrouter-caller.js' // your model call — see examples/
+import { scorer } from 'mini-eval'
 
-const Shipment = z.object({ state: z.string(), zip: z.string().nullable() })
-type Shipment = z.infer<typeof Shipment>
+type Address = { zip: string }
 
-const zip = scorer<string, Shipment, Partial<Shipment>>('zip', ({ output, expected }) => {
-  if (expected?.zip == null) return null // not applicable → excluded from the mean
-  return output.zip === expected.zip ? 1 : { score: 0, reason: `got ${output.zip}` }
+const zip = scorer<string, Address, Partial<Address>>('zip', ({ output, expected }) => {
+  if (expected?.zip == null) return null
+  if (output.zip === expected.zip) return 1
+  return { score: 0, reason: `got ${output.zip}` }
 })
-
-const report = await evaluate<string, Shipment, Partial<Shipment>>('extraction', {
-  models: ['openai/gpt-4o-mini', 'anthropic/claude-3.5-haiku'],
-  data: [{ input: 'PO Box 42, Reno NV 89501', expected: { state: 'NV', zip: '89501' }, tags: ['po_box'] }],
-  scorers: [zip],
-  task: async (text, ctx) => {
-    const { value, usage } = await callModel<Shipment>(ctx.model, `Extract the shipment fields from:\n${text}`, Shipment)
-    ctx.report(usage) // counts as task spend
-    return value
-  },
-})
-
-report.byModel['openai/gpt-4o-mini'].overall // → number in [0,1]
 ```
 
-`ctx.model` is the model currently being swept; the task routes its own call to
-it. For a multi-call pipeline plus a judge, see
-[`examples/rate-shopping.eval.ts`](examples/rate-shopping.eval.ts):
+The score value is a number in [0,1], a `{ score, reason }` object, or `null` to skip the case (not applicable).
+
+### 2. Create a task
+
+A task is the function that calls the model and returns the output.
 
 ```ts
-import type { Task } from 'mini-eval'
+import { Task } from 'mini-eval'
 
-const task: Task<RateRequest, Decision> = async (input, ctx) => {
-  const extracted = await callModel(ctx.model, extractPrompt(input), Quotes)
-  ctx.report(extracted.usage)
-  const shortlist = extracted.value.quotes.filter(q => q.etaDays <= 5).sort((a, b) => a.priceUsd - b.priceUsd)
-  const decision = await callModel(ctx.model, choosePrompt(shortlist), DecisionSchema)
-  ctx.report(decision.usage)
-  return decision.value
+const task: Task<string, Address> = async (input, ctx) => {
+  const model = ctx.model
+  const prompt = `Extract the shipment fields from:\n${input}`
+
+  // AI SDK, OpenRouter, etc. to call the model
+  const { value, usage } = await callModel({ model, prompt })
+
+  // Optional: report usage to count it as task spend
+  ctx.report(usage)
+
+  return value
 }
+```
 
-// a judge is just a scorer that calls a model — on a pinned model, so it doesn't
-// move across the sweep; report its usage to count it as judge spend
-const judge = scorer<RateRequest, Decision, Expected>('judge', async ({ output, report }) => {
-  const { value: v, usage } = await callModel('anthropic/claude-3.5-sonnet', `…${JSON.stringify(output)}`, Verdict)
-  report(usage)
-  return v.ok ? 1 : { score: 0, reason: v.reason }
+### 3. Run the evaluation
+
+An evaluation is a function that takes a name and a configuration, and returns a report.
+
+```ts
+import { evaluate } from 'mini-eval'
+
+const task = /* ... */
+const zip = /* ... */
+
+const models = ['openai/gpt-4o-mini', 'anthropic/claude-3.5-haiku']
+const scorers = [zip]
+
+const report = await evaluate<string, Address, Partial<Address>>('extraction', {
+  models,
+  scorers,
+  task,
+  // Test cases
+  data: [
+    {
+      input: 'PO Box 42, Reno NV 89501',
+      expected: { zip: '89501' },
+      tags: ['po_box'],
+    },
+  ],
 })
+
+report.byModel['openai/gpt-4o-mini']?.overall // → number in [0,1]
 ```
-
-## Run the examples
-
-```bash
-npm run typecheck             # tsc --noEmit, strict
-npm run example:extraction    # a one-call task
-npm run example:rate-shopping # multi-call task + judge
-```
-
-The examples make real model calls, so they need `OPENROUTER_API_KEY`.
 
 ## API
 
