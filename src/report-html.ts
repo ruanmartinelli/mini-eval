@@ -9,6 +9,7 @@ function scoreClass(score: number): string {
 
 function modelRows<O>(byModel: Record<string, ModelReport<O>>): string {
   return Object.entries(byModel)
+    .sort(([, a], [, b]) => b.overall - a.overall)
     .map(([model, m]) => {
       const total = m.cost.taskUsd + m.cost.judgeUsd
       const fill = Math.max(0, Math.min(100, m.overall * 100)).toFixed(1)
@@ -48,14 +49,16 @@ function tagSection<O>(byModel: Record<string, ModelReport<O>>): string {
   return `
       <section>
         <h2>By tag</h2>
-        <table>
-          <thead>
-            <tr><th>Tag</th>${head}</tr>
-          </thead>
-          <tbody>
-            ${rows}
-          </tbody>
-        </table>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr><th>Tag</th>${head}</tr>
+            </thead>
+            <tbody>
+              ${rows}
+            </tbody>
+          </table>
+        </div>
       </section>`
 }
 
@@ -79,7 +82,7 @@ const STYLES = `
       font: 15px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    main { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
+    main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 96px; }
     h1 { font-size: 24px; font-weight: 500; margin: 0 0 4px; letter-spacing: -0.01em; }
     .meta { color: var(--muted); margin: 0; font-size: 14px; }
     section { margin-top: 32px; }
@@ -102,6 +105,7 @@ const STYLES = `
     .fig.score { font-size: 13px; font-weight: 500; }
 
     /* Tag matrix — a model comparison grid */
+    .scroll { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     th, td { text-align: left; padding: 12px 16px; white-space: nowrap; }
     thead th { font-weight: 500; font-size: 12px;  color: var(--muted); }

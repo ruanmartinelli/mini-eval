@@ -56,6 +56,18 @@ describe('renderHtml', () => {
     expect(html).toContain('50.0%')
   })
 
+  it('orders the model rows by score, highest first', () => {
+    const html = renderHtml(
+      report({
+        mid: modelReport({ overall: 0.5 }),
+        best: modelReport({ overall: 0.9 }),
+        worst: modelReport({ overall: 0.1 }),
+      }),
+    )
+    const order = ['best', 'mid', 'worst'].map(name => html.indexOf(`>${name}<`))
+    expect(order).toEqual([...order].sort((a, b) => a - b))
+  })
+
   it('fills each row left-to-right to its score', () => {
     const html = renderHtml(report({ haiku: modelReport({ overall: 0.43 }) }))
     expect(html).toContain('<span class="bar" style="width:43.0%"></span>')
@@ -91,6 +103,8 @@ describe('renderHtml', () => {
     expect(html).toContain('intl')
     // haiku has no `intl` tag → that cell is a dash
     expect(html).toContain('class="num dim">—')
+    // the wide matrix scrolls horizontally instead of overflowing
+    expect(html).toContain('<div class="scroll">')
   })
 
   it('omits the tag section when no case carried a tag', () => {
