@@ -48,7 +48,7 @@ export type ScorerCtx<I, O, E> = {
 export type Scorer<I, O, E> = {
   /** Scorer name, shown in the report. */
   name: string;
-  /** Relative weight in the case's weighted mean. Default 1. */
+  /** Relative weight in the case's weighted mean. Default 1; must be > 0. */
   weight?: number;
   /** Scores one case; may be sync or async. */
   run: (ctx: ScorerCtx<I, O, E>) => ScoreValue | Promise<ScoreValue>;

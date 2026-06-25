@@ -29,6 +29,10 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
 
   const scorers = config.scorers
   assert(scorers && scorers.length > 0, 'scorers is required')
+  assert(
+    scorers.every(s => (s.weight ?? 1) > 0),
+    'scorer weight must be > 0',
+  )
 
   const task = config.task
   assert(task, 'task is required')

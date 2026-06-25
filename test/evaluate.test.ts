@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { evaluate } from '../src/evaluate.js'
-import type { Case, EvalConfig, Scorer, Task } from '../src/types.js'
+import type { Case, EvalConfig, Scorer, ScorerCtx, Task } from '../src/types.js'
 
 type Input = { x: number }
 type Output = { y: number; model: string }
@@ -149,5 +149,121 @@ describe('evaluate', () => {
   it('rejects when task is missing', async () => {
     const bad = { ...config(), task: undefined } as unknown as EvalConfig<Input, Output, Expected>
     await expect(evaluate('bad', bad)).rejects.toThrow('task is required')
+  })
+
+  it('passes input, output, expected, and tags through to the scorer ctx', async () => {
+    let seen: ScorerCtx<Input, Output, Expected> | undefined
+    const capture: Scorer<Input, Output, Expected> = {
+      name: 'capture',
+      run: ctx => {
+        seen = ctx
+        return 1
+      },
+    }
+    await evaluate('ctx', config({ scorers: [capture], data: [{ input: { x: 3 }, expected: { y: 6 }, tags: ['t'] }] }))
+    expect(seen?.input).toEqual({ x: 3 })
+    expect(seen?.output).toEqual({ y: 6, model: 'm1' })
+    expect(seen?.expected).toEqual({ y: 6 })
+    expect(seen?.tags).toEqual(['t'])
+    expect(typeof seen?.report).toBe('function')
+  })
+
+  it('defaults tags to [] in the scorer ctx when a case omits them', async () => {
+    let seen: ScorerCtx<Input, Output, Expected> | undefined
+    const capture: Scorer<Input, Output, Expected> = {
+      name: 'capture',
+      run: ctx => {
+        seen = ctx
+        return 1
+      },
+    }
+    await evaluate('ctx', config({ scorers: [capture], data: [{ input: { x: 1 } }] }))
+    expect(seen?.tags).toEqual([])
+    expect(seen?.expected).toBeUndefined()
+  })
+
+  it('awaits an async scorer before recording its score', async () => {
+    const asyncScorer: Scorer<Input, Output, Expected> = {
+      name: 'async',
+      run: async () => {
+        await Promise.resolve()
+        return 0.5
+      },
+    }
+    const report = await evaluate('async', config({ scorers: [asyncScorer], data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.score).toBe(0.5)
+  })
+
+  it('invokes the task once per case per model', async () => {
+    let calls = 0
+    const counting: Task<Input, Output> = async (input, ctx) => {
+      calls++
+      return { y: input.x * 2, model: ctx.model }
+    }
+    await evaluate('count', config({ task: counting, models: ['m1', 'm2'] }))
+    expect(calls).toBe(4) // 2 cases * 2 models
+  })
+
+  it('accumulates task usage across multiple report() calls within one task', async () => {
+    const multiTask: Task<Input, Output> = async (input, ctx) => {
+      ctx.report({ inputTokens: 10, outputTokens: 2, costUsd: 0.01 })
+      ctx.report({ inputTokens: 5, outputTokens: 3, costUsd: 0.02 })
+      return { y: input.x * 2, model: ctx.model }
+    }
+    const report = await evaluate('multi', config({ task: multiTask, data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.usage.task).toMatchObject({ inputTokens: 15, outputTokens: 5, costUsd: 0.03 })
+  })
+
+  it('accumulates judge usage across multiple scorers into one judge total', async () => {
+    const j1: Scorer<Input, Output, Expected> = {
+      name: 'j1',
+      run: ({ report }) => {
+        report({ inputTokens: 5, outputTokens: 1, costUsd: 0.01 })
+        return 1
+      },
+    }
+    const j2: Scorer<Input, Output, Expected> = {
+      name: 'j2',
+      run: ({ report }) => {
+        report({ inputTokens: 7, outputTokens: 2, costUsd: 0.02 })
+        return 1
+      },
+    }
+    const report = await evaluate('judges', config({ scorers: [j1, j2], data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.usage.judge).toMatchObject({ inputTokens: 12, outputTokens: 3, costUsd: 0.03 })
+  })
+
+  it('records weight 1 in the breakdown when a scorer omits its weight', async () => {
+    const report = await evaluate('weight', config({ data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.scores[0]?.weight).toBe(1)
+  })
+
+  it('rejects when a data factory resolves to an empty array', async () => {
+    await expect(evaluate('empty', config({ data: async () => [] }))).rejects.toThrow('data is required')
+  })
+
+  it('does not clamp scorer values outside [0,1] (the [0,1] contract is the caller’s)', async () => {
+    const over: Scorer<Input, Output, Expected> = { name: 'over', run: () => 2 }
+    const report = await evaluate('over', config({ scorers: [over], data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.score).toBe(2)
+  })
+
+  it('runs the task once per duplicate model id but keeps only one report entry (silent overwrite + wasted work)', async () => {
+    let calls = 0
+    const counting: Task<Input, Output> = async (input, ctx) => {
+      calls++
+      return { y: input.x * 2, model: ctx.model }
+    }
+    const report = await evaluate('dup', config({ task: counting, models: ['m1', 'm1'], data: [cases[0]!] }))
+    expect(Object.keys(report.byModel)).toEqual(['m1']) // the second sweep clobbers the first
+    expect(calls).toBe(2) // ...yet the task still ran twice — duplicate ids should arguably dedupe or throw
+  })
+
+  it('rejects a scorer with a non-positive weight', async () => {
+    const zero: Scorer<Input, Output, Expected> = { name: 'zero', weight: 0, run: () => 1 }
+    await expect(evaluate('w0', config({ scorers: [zero], data: [cases[0]!] }))).rejects.toThrow('weight must be > 0')
+
+    const negative: Scorer<Input, Output, Expected> = { name: 'neg', weight: -1, run: () => 1 }
+    await expect(evaluate('wneg', config({ scorers: [negative], data: [cases[0]!] }))).rejects.toThrow('weight must be > 0')
   })
 })

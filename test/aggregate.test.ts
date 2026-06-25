@@ -82,4 +82,14 @@ describe('aggregate', () => {
     const cases = [caseResult({ score: 1 }), caseResult({ score: 0 })]
     expect(aggregate(cases).cases).toBe(cases)
   })
+
+  it('treats a thrown-task case (score 0, tagged) as a 0 toward its tags', () => {
+    const report = aggregate([caseResult({ score: 1, tags: ['t'] }), caseResult({ score: 0, output: null, tags: ['t'] })])
+    expect(report.byTag.t).toBeCloseTo(0.5)
+  })
+
+  it('should not double-count a tag repeated within a single case', () => {
+    const report = aggregate([caseResult({ score: 1, tags: ['a', 'a'] }), caseResult({ score: 0, tags: ['a'] })])
+    expect(report.byTag.a).toBeCloseTo(0.5)
+  })
 })
