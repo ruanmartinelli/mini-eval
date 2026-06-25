@@ -1,5 +1,3 @@
-import type { ZodType } from "zod";
-
 /** mini-eval — public type definitions. */
 
 /** One test case. */
@@ -18,39 +16,15 @@ export type Case<I, E> = {
  */
 export type ScoreValue = number | { score: number; reason?: string } | null;
 
-/** Arguments for a model call. */
-export type GenerateArgs<T> = {
-  /** Prompt text. */
-  prompt: string;
-  /** When present, the result is validated to `T`. */
-  schema?: ZodType<T>;
-  /** Model id; omit to use the swept model, pass to pin it (e.g. a judge). */
-  model?: string;
-  /** Sampling temperature. */
-  temperature?: number;
-};
-
-/** Token accounting for a single model call, plus dollar cost if the caller reports it. */
+/** Token accounting for a single model call, plus dollar cost if the caller knows it. */
 export type Usage = { inputTokens: number; outputTokens: number; costUsd?: number };
-
-/**
- * A model caller that returns the value plus usage. Supplied per eval via
- * `EvalConfig.generate`; see the examples for one built on OpenRouter.
- */
-export type GenerateImpl = <T>(args: GenerateArgs<T>) => Promise<{ value: T; usage?: Usage }>;
-
-/**
- * The instrumented caller injected into tasks and scorers. Returns the value and
- * records usage behind the scenes.
- */
-export type GenerateFn = <T>(args: GenerateArgs<T>) => Promise<T>;
 
 /** Context passed to a {@link Task}. */
 export type TaskCtx = {
-  /** The swept model for this run. */
+  /** The swept model for this run; the task routes its own call to it. */
   model: string;
-  /** Instrumented model caller. */
-  generate: GenerateFn;
+  /** Report a model call's usage; counts toward task spend. */
+  report: (usage: Usage) => void;
 };
 
 /** The system under test: maps an input to an output via one or more model calls. */
@@ -66,8 +40,8 @@ export type ScorerCtx<I, O, E> = {
   expected?: E;
   /** The case's tags. */
   tags: string[];
-  /** Model caller, so a scorer can act as a judge. */
-  generate: GenerateFn;
+  /** Report a judge's model-call usage; counts toward judge spend. */
+  report: (usage: Usage) => void;
 };
 
 /** A named scoring function with an optional weight. */
@@ -80,25 +54,16 @@ export type Scorer<I, O, E> = {
   run: (ctx: ScorerCtx<I, O, E>) => ScoreValue | Promise<ScoreValue>;
 };
 
-/**
- * Configuration passed to `evaluate`. Provide a `task`, or `schema` + `prompt`
- * to build the one-call task.
- */
+/** Configuration passed to `evaluate`. */
 export type EvalConfig<I, O, E> = {
   /** Test cases, or an async factory that produces them. */
   data: Case<I, E>[] | (() => Promise<Case<I, E>[]>);
   /** Scorers applied to each case. */
   scorers: Scorer<I, O, E>[];
-  /** Model caller; see the examples for one built on OpenRouter. */
-  generate: GenerateImpl;
-  /** Models to sweep. */
-  models?: string[];
-  /** The system under test; omit to use `schema` + `prompt`. */
-  task?: Task<I, O>;
-  /** Output schema for the built-in one-call task. */
-  schema?: ZodType<O>;
-  /** Prompt builder for the built-in one-call task. */
-  prompt?: (input: I) => string;
+  /** Models to sweep — at least one. */
+  models: string[];
+  /** The system under test. */
+  task: Task<I, O>;
   /** Max concurrent cases. Not yet honored; cases run serially. */
   concurrency?: number;
   /** Path to a baseline report for gating. Not yet honored. */
@@ -115,8 +80,10 @@ export type CaseResult<O> = {
   score: number;
   /** Per-scorer breakdown. */
   scores: Array<{ name: string; score: number; weight: number; reason: string }>;
-  /** Token/cost usage, split into task and judge spend. */
+  /** Usage reported by the task and by judges, kept separate. */
   usage: { task: Usage; judge: Usage };
+  /** Task wall-clock latency, in milliseconds. */
+  latencyMs: number;
 };
 
 /** The aggregated report for one model. */
@@ -125,7 +92,7 @@ export type ModelReport<O> = {
   overall: number;
   /** Mean score per tag. */
   byTag: Record<string, number>;
-  /** Total task and judge spend. */
+  /** Total task and judge spend, summed from reported usage. */
   cost: { taskUsd: number; judgeUsd: number };
   /** Per-case latency percentiles, in milliseconds. */
   latency: { p50Ms: number; p95Ms: number };

@@ -1,15 +1,19 @@
 /**
- * An example `GenerateImpl` built on OpenRouter's `@openrouter/agent` SDK: one
- * key reaches every provider, and model ids are `provider/model` slugs. Pass it
- * to `evaluate` via `config.generate`. Copy and adapt it for your own provider —
- * mini-eval itself ships no model caller.
+ * Helper for the examples: call a model through OpenRouter and return the parsed
+ * value plus usage. With a `schema` it requests `json_schema` output and
+ * validates it back to `T`; without one it returns the model's text. The task
+ * (or judge) then reports the usage via `ctx.report(usage)`.
+ *
+ * mini-eval itself ships no model caller — this lives in the examples. Copy and
+ * adapt it for your own provider.
  *
  * Needs `OPENROUTER_API_KEY` in the environment.
  */
 import z from 'zod'
+import type { ZodType } from 'zod'
 import { OpenRouter } from '@openrouter/agent'
 import type { CallModelInput } from '@openrouter/agent'
-import type { GenerateArgs, GenerateImpl, Usage } from '../src/index.js'
+import type { Usage } from '../src/index.js'
 
 const openrouter = new OpenRouter({ apiKey: process.env.OPENROUTER_API_KEY })
 
@@ -25,29 +29,16 @@ function toUsage(usage: SdkUsage | null | undefined): Usage {
   }
 }
 
-/**
- * With a `schema` it requests `json_schema` output and validates it back to `T`;
- * without one it returns the model's text. Throws if `args.model` is unset
- * (`instrument` normally binds the swept model for you).
- */
-export const openrouterCaller: GenerateImpl = async <T>(args: GenerateArgs<T>): Promise<{ value: T; usage?: Usage }> => {
-  if (!args.model) {
-    throw new Error('openrouterCaller requires an explicit `model`; instrument() normally binds it for you.')
-  }
+export async function callModel<T>(model: string, prompt: string, schema?: ZodType<T>): Promise<{ value: T; usage: Usage }> {
+  const options: CallModelInput = { model, input: prompt }
 
-  const options: CallModelInput = {
-    model: args.model,
-    input: args.prompt,
-    temperature: args.temperature,
-  }
-
-  if (args.schema) {
+  if (schema) {
     options.text = {
       format: {
         type: 'json_schema' as const,
         name: 'output',
         strict: true,
-        schema: z.toJSONSchema(args.schema) as Record<string, unknown>,
+        schema: z.toJSONSchema(schema) as Record<string, unknown>,
       },
     }
   }
@@ -59,9 +50,9 @@ export const openrouterCaller: GenerateImpl = async <T>(args: GenerateArgs<T>): 
 
   const usage = toUsage(response.usage)
 
-  if (args.schema) {
+  if (schema) {
     // Validate the model's JSON back to `T`.
-    return { value: args.schema.parse(JSON.parse(text)), usage }
+    return { value: schema.parse(JSON.parse(text)), usage }
   }
 
   // No schema → return the raw text as `T`.

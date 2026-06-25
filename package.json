@@ -32,16 +32,15 @@
   ],
   "author": "Ruan Martinelli",
   "license": "MIT",
-  "dependencies": {
-    "zod": "^4.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@openrouter/agent": "^0.7.2",
     "@openrouter/sdk": "^0.13.7",
     "@types/node": "^22.0.0",
     "dotenv": "^17.4.2",
     "tsx": "^4.19.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "zod": "^4.4.3"
   },
   "prettier": {
     "singleQuote": true,

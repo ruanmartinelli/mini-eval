@@ -8,10 +8,6 @@ import type { Scorer } from './types.js'
  * @param opts optional settings; `weight` defaults to 1.
  * @returns the scorer.
  */
-export function scorer<I, O, E>(
-  name: string,
-  run: Scorer<I, O, E>['run'],
-  opts?: { weight?: number },
-): Scorer<I, O, E> {
+export function scorer<I, O, E>(name: string, run: Scorer<I, O, E>['run'], opts?: { weight?: number }): Scorer<I, O, E> {
   return { name, run, weight: opts?.weight }
 }

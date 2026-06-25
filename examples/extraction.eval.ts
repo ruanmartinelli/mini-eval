@@ -1,6 +1,7 @@
 /**
- * Tier-one usage: no `task`. Just a `schema` + a `prompt`, and mini-eval builds
- * the obvious one-call task for you. This is the smallest thing that works.
+ * The smallest thing that works: a one-call `task` plus a few scorers, swept
+ * across several models. The task calls the model via the example `callModel`
+ * helper and reports usage with `ctx.report`.
  *
  * Run with:  npm run example:extraction
  * (Makes real model calls — needs OPENROUTER_API_KEY in your environment / .env.)
@@ -8,7 +9,7 @@
 import 'dotenv/config'
 import { z } from 'zod'
 import { evaluate, scorer } from '../src/index.js'
-import { openrouterCaller } from './openrouter-caller.js'
+import { callModel } from './openrouter-caller.js'
 
 /** The structured output we extract. `output` inside scorers is typed to this. */
 const Shipment = z.object({
@@ -52,11 +53,14 @@ const weight = scorer<RawText, Shipment, Expected>('weight', ({ output, expected
 
 const report = await evaluate<RawText, Shipment, Expected>('extraction', {
   models: ['openai/gpt-oss-20b', 'mistralai/mistral-nemo', 'qwen/qwen-2.5-7b-instruct', 'google/gemma-3-4b-it', 'z-ai/glm-4.7-flash'], // OpenRouter slugs
-  generate: openrouterCaller,
 
-  // No `task` — mini-eval builds the one-call task from schema + prompt.
-  schema: Shipment,
-  prompt: text => `Extract the shipment fields (state, ZIP, weight in oz) from this label.\n` + `Use null for weight if it is not stated.\n\n${text}`,
+  // The task calls the model itself and reports usage. `ctx.model` is the swept model.
+  task: async (text, ctx) => {
+    const prompt = `Extract the shipment fields (state, ZIP, weight in oz) from this label.\n` + `Use null for weight if it is not stated.\n\n${text}`
+    const { value, usage } = await callModel(ctx.model, prompt, Shipment)
+    ctx.report(usage)
+    return value
+  },
 
   data: [
     {

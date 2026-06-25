@@ -1,5 +1,13 @@
 import type { CaseResult, ModelReport } from './types.js'
 
+/** The p-th percentile (nearest-rank) of `values`, or 0 when empty. */
+function percentile(values: number[], p: number): number {
+  if (values.length === 0) return 0
+  const sorted = [...values].sort((a, b) => a - b)
+  const idx = Math.min(sorted.length, Math.max(1, Math.ceil((p / 100) * sorted.length))) - 1
+  return sorted[idx] ?? 0
+}
+
 /**
  * Aggregate a model's per-case results into its {@link ModelReport}: overall and
  * per-tag mean scores, summed cost, and latency percentiles.
@@ -30,11 +38,12 @@ export function aggregate<O>(cases: CaseResult<O>[]): ModelReport<O> {
     }),
     { taskUsd: 0, judgeUsd: 0 },
   )
+  const latencies = cases.map(c => c.latencyMs)
   return {
     overall,
     byTag,
     cost,
-    latency: { p50Ms: 0, p95Ms: 0 },
+    latency: { p50Ms: percentile(latencies, 50), p95Ms: percentile(latencies, 95) },
     cases,
   }
 }

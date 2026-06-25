@@ -6,14 +6,14 @@
  *                              code in between. The framework never owns this
  *                              control flow; it only instruments the calls.
  *   2. judge-as-scorer       — there is no special judge concept; the judge is
- *                              just a scorer that calls `ctx.generate`.
- *   3. pinned judge model    — task calls use the swept `ctx.model`; the judge
- *                              passes an explicit `model`, so it does NOT move
+ *                              just a scorer that calls a model.
+ *   3. pinned judge model    — the task calls the swept `ctx.model`; the judge
+ *                              calls a pinned model directly, so it does NOT move
  *                              across the sweep.
+ *   4. cost attribution      — the task reports usage as task spend and the judge
+ *                              reports usage as judge spend, via `ctx.report`.
  *
- * (Cost attribution — splitting task vs. judge spend — is the intended model,
- * but is not wired up yet, so the printed cost lines currently read as zero.)
- *
+
  * Run with:  npm run example:rate-shopping
  * (Makes real model calls — needs OPENROUTER_API_KEY in your environment / .env.)
  */
@@ -21,7 +21,7 @@ import 'dotenv/config'
 import { z } from 'zod'
 import { evaluate, scorer } from '../src/index.js'
 import type { Task } from '../src/index.js'
-import { openrouterCaller } from './openrouter-caller.js'
+import { callModel } from './openrouter-caller.js'
 
 // --- domain types ---
 
@@ -56,12 +56,11 @@ const DecisionSchema = z.object({
 // --- the system under test: a two-call pipeline with plain code between ---
 
 const task: Task<RateRequest, Decision> = async (input, ctx) => {
-  // Call 1 (task spend): extract candidate quotes. Omitting `model` uses the
-  // swept model `ctx.model`. `quotes` is typed from the `Quotes` schema.
-  const { quotes } = await ctx.generate({
-    prompt: `List realistic carrier quotes to ship ${input.weightOz}oz ` + `from ${input.from} to ${input.to}.`,
-    schema: Quotes,
-  })
+  // Call 1 (task spend): extract candidate quotes on the swept model `ctx.model`,
+  // and report the usage. `quotes` is typed from the `Quotes` schema.
+  const extracted = await callModel(ctx.model, `List realistic carrier quotes to ship ${input.weightOz}oz ` + `from ${input.from} to ${input.to}.`, Quotes)
+  ctx.report(extracted.usage)
+  const { quotes } = extracted.value
 
   // Plain function between the two model calls — the framework stays out of it.
   const shortlist = quotes
@@ -70,12 +69,13 @@ const task: Task<RateRequest, Decision> = async (input, ctx) => {
     .slice(0, 3)
 
   // Call 2 (task spend): choose from the shortlist, again on the swept model.
-  return ctx.generate({
-    prompt:
-      `Pick the single best option for a customer who wants it within 5 days, ` +
-      `and explain why.\n\n${JSON.stringify(shortlist, null, 2)}`,
-    schema: DecisionSchema,
-  })
+  const chosen = await callModel(
+    ctx.model,
+    `Pick the single best option for a customer who wants it within 5 days, ` + `and explain why.\n\n${JSON.stringify(shortlist, null, 2)}`,
+    DecisionSchema,
+  )
+  ctx.report(chosen.usage)
+  return chosen.value
 }
 
 // --- a cheap, deterministic scorer (counts as task-side correctness) ---
@@ -96,18 +96,18 @@ const Verdict = z.object({ ok: z.boolean(), reason: z.string() })
 
 const judge_sensible = scorer<RateRequest, Decision, Expected>(
   'judge:sensible',
-  async ({ input, output, generate }) => {
-    // Explicit `model` here pins the judge so it does NOT drift across the
-    // sweep; this call is conceptually `judge` spend, not `task` spend.
-    const verdict = await generate({
-      model: JUDGE_MODEL,
-      schema: Verdict,
-      prompt:
-        `A shipping assistant chose this for a ${input.weightOz}oz parcel ` +
+  async ({ input, output, report }) => {
+    // The judge calls a PINNED model directly, so it does NOT drift across the
+    // sweep; reporting its usage counts as `judge` spend, separate from `task`.
+    const { value: verdict, usage } = await callModel(
+      JUDGE_MODEL,
+      `A shipping assistant chose this for a ${input.weightOz}oz parcel ` +
         `from ${input.from} to ${input.to}:\n${JSON.stringify(output)}\n\n` +
         `Is the rationale internally consistent and the choice sensible? ` +
         `Answer ok=true/false with a short reason.`,
-    })
+      Verdict,
+    )
+    report(usage)
     return verdict.ok ? 1 : { score: 0, reason: verdict.reason }
   },
   { weight: 0.25 }, // a judge carries low weight: it nudges, it doesn't decide
@@ -117,7 +117,6 @@ const judge_sensible = scorer<RateRequest, Decision, Expected>(
 
 const report = await evaluate<RateRequest, Decision, Expected>('rate-shopping', {
   models: ['openai/gpt-oss-20b'],
-  generate: openrouterCaller,
   task,
   data: [
     {

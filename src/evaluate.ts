@@ -1,8 +1,16 @@
 import assert from 'node:assert'
-import type { CaseResult, EvalConfig, EvalReport } from './types.js'
-import { instrument } from './generate.js'
+import type { CaseResult, EvalConfig, EvalReport, Usage } from './types.js'
 import { to } from './utils.js'
 import { aggregate } from './aggregate.js'
+
+const zeroUsage = (): Usage => ({ inputTokens: 0, outputTokens: 0 })
+
+/** Accumulate a reported call's usage into a running total. */
+function addUsage(acc: Usage, u: Usage): void {
+  acc.inputTokens += u.inputTokens
+  acc.outputTokens += u.outputTokens
+  if (u.costUsd != null) acc.costUsd = (acc.costUsd ?? 0) + u.costUsd
+}
 
 /**
  * Sweeps `config.models`, runs the task on each case, scores the output, and
@@ -20,46 +28,32 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
   const models = config.models
   assert(models && models.length > 0, 'models is required')
 
-  const impl = config.generate
-  assert(impl, 'generate is required')
-
   const scorers = config.scorers
+  assert(scorers && scorers.length > 0, 'scorers is required')
 
-  const task =
-    config.task ??
-    (async (input, ctx) => {
-      const output = await ctx.generate({
-        prompt: config.prompt!(input),
-        schema: config.schema!,
-      })
-
-      return output
-    })
+  const task = config.task
+  assert(task, 'task is required')
 
   const byModel: EvalReport<O>['byModel'] = {}
 
   for (const model of models) {
     const results: CaseResult<O>[] = []
 
-    const generate = instrument(impl, model, (phase, usage) => {})
-
     for (const c of cases) {
       const tags = c.tags ?? []
       const input = c.input
       const expected = c.expected
 
-      const [error, result] = await to(task(input, { model, generate }))
+      // Usage is reported by the caller: the task reports task spend, a judge
+      // scorer reports judge spend.
+      const usage = { task: zeroUsage(), judge: zeroUsage() }
+
+      const start = performance.now()
+      const [error, result] = await to(task(input, { model, report: u => addUsage(usage.task, u) }))
+      const latencyMs = performance.now() - start
+
       if (error) {
-        results.push({
-          tags,
-          output: null,
-          score: 0,
-          scores: [],
-          usage: {
-            task: { inputTokens: 0, outputTokens: 0 },
-            judge: { inputTokens: 0, outputTokens: 0 },
-          },
-        })
+        results.push({ tags, output: null, score: 0, scores: [], usage, latencyMs })
         continue
       }
 
@@ -68,17 +62,24 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
       const scores: CaseResult<O>['scores'] = []
 
       for (const scorer of scorers) {
-        const value = await scorer.run({ generate, input, tags, expected, output })
+        try {
+          const value = await scorer.run({ input, output, expected, tags, report: u => addUsage(usage.judge, u) })
 
-        if (value === null) continue
-        const normalized = typeof value === 'number' ? { score: value, reason: '' } : value
+          if (value === null) continue
+          const normalized = typeof value === 'number' ? { score: value, reason: '' } : value
 
-        scores.push({
-          name: scorer.name,
-          score: normalized.score,
-          weight: scorer.weight ?? 1,
-          reason: normalized.reason ?? '',
-        })
+          scores.push({
+            name: scorer.name,
+            score: normalized.score,
+            weight: scorer.weight ?? 1,
+            reason: normalized.reason ?? '',
+          })
+        } catch (err) {
+          // A throwing scorer (e.g. a judge whose model call failed) scores 0
+          // with the error surfaced, rather than aborting the whole run.
+          const message = err instanceof Error ? err.message : String(err)
+          scores.push({ name: scorer.name, score: 0, weight: scorer.weight ?? 1, reason: `scorer threw: ${message}` })
+        }
       }
 
       let score = 0
@@ -90,16 +91,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
         score = sum / weight
       }
 
-      results.push({
-        tags,
-        output,
-        score,
-        scores,
-        usage: {
-          task: { inputTokens: 0, outputTokens: 0 },
-          judge: { inputTokens: 0, outputTokens: 0 },
-        },
-      })
+      results.push({ tags, output, score, scores, usage, latencyMs })
     }
 
     byModel[model] = aggregate(results)
