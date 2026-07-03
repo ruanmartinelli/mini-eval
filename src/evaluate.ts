@@ -35,7 +35,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
   for (const model of models) {
     const results: CaseResult<O>[] = []
 
-    for (const c of cases) {
+    cases.forEach(async c => {
       const tags = c.tags ?? []
       const input = c.input
       const expected = c.expected
@@ -64,7 +64,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
           output: null,
         })
 
-        continue
+        return
       }
 
       const output = result!
@@ -107,7 +107,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
       }
 
       results.push({ tags, output, score, scores, usage, latencyMs })
-    }
+    })
 
     byModel[model] = aggregate(results)
   }
