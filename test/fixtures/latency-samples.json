@@ -1,0 +1,3502 @@
+[
+  {
+    "case": "case-0000",
+    "latencyMs": 831.3,
+    "tokens": 194
+  },
+  {
+    "case": "case-0001",
+    "latencyMs": 996.0,
+    "tokens": 89
+  },
+  {
+    "case": "case-0002",
+    "latencyMs": 248.1,
+    "tokens": 588
+  },
+  {
+    "case": "case-0003",
+    "latencyMs": 298.4,
+    "tokens": 636
+  },
+  {
+    "case": "case-0004",
+    "latencyMs": 214.6,
+    "tokens": 559
+  },
+  {
+    "case": "case-0005",
+    "latencyMs": 578.1,
+    "tokens": 128
+  },
+  {
+    "case": "case-0006",
+    "latencyMs": 1086.1,
+    "tokens": 111
+  },
+  {
+    "case": "case-0007",
+    "latencyMs": 638.3,
+    "tokens": 604
+  },
+  {
+    "case": "case-0008",
+    "latencyMs": 1064.9,
+    "tokens": 886
+  },
+  {
+    "case": "case-0009",
+    "latencyMs": 1391.9,
+    "tokens": 268
+  },
+  {
+    "case": "case-0010",
+    "latencyMs": 1543.1,
+    "tokens": 636
+  },
+  {
+    "case": "case-0011",
+    "latencyMs": 2278.7,
+    "tokens": 630
+  },
+  {
+    "case": "case-0012",
+    "latencyMs": 1438.5,
+    "tokens": 90
+  },
+  {
+    "case": "case-0013",
+    "latencyMs": 2344.9,
+    "tokens": 87
+  },
+  {
+    "case": "case-0014",
+    "latencyMs": 1371.5,
+    "tokens": 176
+  },
+  {
+    "case": "case-0015",
+    "latencyMs": 751.9,
+    "tokens": 187
+  },
+  {
+    "case": "case-0016",
+    "latencyMs": 1334.4,
+    "tokens": 624
+  },
+  {
+    "case": "case-0017",
+    "latencyMs": 795.7,
+    "tokens": 875
+  },
+  {
+    "case": "case-0018",
+    "latencyMs": 1662.2,
+    "tokens": 145
+  },
+  {
+    "case": "case-0019",
+    "latencyMs": 1429.3,
+    "tokens": 694
+  },
+  {
+    "case": "case-0020",
+    "latencyMs": 515.9,
+    "tokens": 139
+  },
+  {
+    "case": "case-0021",
+    "latencyMs": 1350.8,
+    "tokens": 104
+  },
+  {
+    "case": "case-0022",
+    "latencyMs": 1389.3,
+    "tokens": 673
+  },
+  {
+    "case": "case-0023",
+    "latencyMs": 557.8,
+    "tokens": 736
+  },
+  {
+    "case": "case-0024",
+    "latencyMs": 1313.6,
+    "tokens": 835
+  },
+  {
+    "case": "case-0025",
+    "latencyMs": 808.8,
+    "tokens": 639
+  },
+  {
+    "case": "case-0026",
+    "latencyMs": 2222.4,
+    "tokens": 410
+  },
+  {
+    "case": "case-0027",
+    "latencyMs": 775.5,
+    "tokens": 853
+  },
+  {
+    "case": "case-0028",
+    "latencyMs": 497.1,
+    "tokens": 838
+  },
+  {
+    "case": "case-0029",
+    "latencyMs": 646.3,
+    "tokens": 628
+  },
+  {
+    "case": "case-0030",
+    "latencyMs": 776.6,
+    "tokens": 546
+  },
+  {
+    "case": "case-0031",
+    "latencyMs": 2110.3,
+    "tokens": 786
+  },
+  {
+    "case": "case-0032",
+    "latencyMs": 1121.3,
+    "tokens": 663
+  },
+  {
+    "case": "case-0033",
+    "latencyMs": 2354.0,
+    "tokens": 160
+  },
+  {
+    "case": "case-0034",
+    "latencyMs": 1267.7,
+    "tokens": 208
+  },
+  {
+    "case": "case-0035",
+    "latencyMs": 1836.6,
+    "tokens": 195
+  },
+  {
+    "case": "case-0036",
+    "latencyMs": 2245.2,
+    "tokens": 471
+  },
+  {
+    "case": "case-0037",
+    "latencyMs": 171.0,
+    "tokens": 724
+  },
+  {
+    "case": "case-0038",
+    "latencyMs": 260.1,
+    "tokens": 611
+  },
+  {
+    "case": "case-0039",
+    "latencyMs": 1409.4,
+    "tokens": 877
+  },
+  {
+    "case": "case-0040",
+    "latencyMs": 807.9,
+    "tokens": 751
+  },
+  {
+    "case": "case-0041",
+    "latencyMs": 892.4,
+    "tokens": 548
+  },
+  {
+    "case": "case-0042",
+    "latencyMs": 1425.4,
+    "tokens": 507
+  },
+  {
+    "case": "case-0043",
+    "latencyMs": 239.5,
+    "tokens": 135
+  },
+  {
+    "case": "case-0044",
+    "latencyMs": 2271.7,
+    "tokens": 525
+  },
+  {
+    "case": "case-0045",
+    "latencyMs": 1697.1,
+    "tokens": 106
+  },
+  {
+    "case": "case-0046",
+    "latencyMs": 220.8,
+    "tokens": 758
+  },
+  {
+    "case": "case-0047",
+    "latencyMs": 798.3,
+    "tokens": 631
+  },
+  {
+    "case": "case-0048",
+    "latencyMs": 2384.0,
+    "tokens": 881
+  },
+  {
+    "case": "case-0049",
+    "latencyMs": 1113.9,
+    "tokens": 773
+  },
+  {
+    "case": "case-0050",
+    "latencyMs": 975.0,
+    "tokens": 724
+  },
+  {
+    "case": "case-0051",
+    "latencyMs": 885.1,
+    "tokens": 512
+  },
+  {
+    "case": "case-0052",
+    "latencyMs": 904.7,
+    "tokens": 665
+  },
+  {
+    "case": "case-0053",
+    "latencyMs": 351.7,
+    "tokens": 100
+  },
+  {
+    "case": "case-0054",
+    "latencyMs": 586.2,
+    "tokens": 334
+  },
+  {
+    "case": "case-0055",
+    "latencyMs": 380.1,
+    "tokens": 293
+  },
+  {
+    "case": "case-0056",
+    "latencyMs": 1003.1,
+    "tokens": 548
+  },
+  {
+    "case": "case-0057",
+    "latencyMs": 266.9,
+    "tokens": 499
+  },
+  {
+    "case": "case-0058",
+    "latencyMs": 1011.8,
+    "tokens": 324
+  },
+  {
+    "case": "case-0059",
+    "latencyMs": 2129.5,
+    "tokens": 878
+  },
+  {
+    "case": "case-0060",
+    "latencyMs": 1078.8,
+    "tokens": 603
+  },
+  {
+    "case": "case-0061",
+    "latencyMs": 725.9,
+    "tokens": 465
+  },
+  {
+    "case": "case-0062",
+    "latencyMs": 2368.6,
+    "tokens": 739
+  },
+  {
+    "case": "case-0063",
+    "latencyMs": 2131.3,
+    "tokens": 276
+  },
+  {
+    "case": "case-0064",
+    "latencyMs": 430.1,
+    "tokens": 220
+  },
+  {
+    "case": "case-0065",
+    "latencyMs": 431.0,
+    "tokens": 714
+  },
+  {
+    "case": "case-0066",
+    "latencyMs": 621.3,
+    "tokens": 536
+  },
+  {
+    "case": "case-0067",
+    "latencyMs": 2008.1,
+    "tokens": 226
+  },
+  {
+    "case": "case-0068",
+    "latencyMs": 689.6,
+    "tokens": 44
+  },
+  {
+    "case": "case-0069",
+    "latencyMs": 418.0,
+    "tokens": 587
+  },
+  {
+    "case": "case-0070",
+    "latencyMs": 936.7,
+    "tokens": 619
+  },
+  {
+    "case": "case-0071",
+    "latencyMs": 819.2,
+    "tokens": 168
+  },
+  {
+    "case": "case-0072",
+    "latencyMs": 1681.9,
+    "tokens": 567
+  },
+  {
+    "case": "case-0073",
+    "latencyMs": 2284.5,
+    "tokens": 710
+  },
+  {
+    "case": "case-0074",
+    "latencyMs": 1648.8,
+    "tokens": 95
+  },
+  {
+    "case": "case-0075",
+    "latencyMs": 1139.4,
+    "tokens": 838
+  },
+  {
+    "case": "case-0076",
+    "latencyMs": 2288.4,
+    "tokens": 736
+  },
+  {
+    "case": "case-0077",
+    "latencyMs": 1931.1,
+    "tokens": 441
+  },
+  {
+    "case": "case-0078",
+    "latencyMs": 1003.5,
+    "tokens": 443
+  },
+  {
+    "case": "case-0079",
+    "latencyMs": 320.2,
+    "tokens": 689
+  },
+  {
+    "case": "case-0080",
+    "latencyMs": 1009.0,
+    "tokens": 235
+  },
+  {
+    "case": "case-0081",
+    "latencyMs": 236.2,
+    "tokens": 253
+  },
+  {
+    "case": "case-0082",
+    "latencyMs": 1102.3,
+    "tokens": 152
+  },
+  {
+    "case": "case-0083",
+    "latencyMs": 868.9,
+    "tokens": 93
+  },
+  {
+    "case": "case-0084",
+    "latencyMs": 317.5,
+    "tokens": 620
+  },
+  {
+    "case": "case-0085",
+    "latencyMs": 430.9,
+    "tokens": 143
+  },
+  {
+    "case": "case-0086",
+    "latencyMs": 2281.6,
+    "tokens": 668
+  },
+  {
+    "case": "case-0087",
+    "latencyMs": 139.2,
+    "tokens": 252
+  },
+  {
+    "case": "case-0088",
+    "latencyMs": 1504.6,
+    "tokens": 192
+  },
+  {
+    "case": "case-0089",
+    "latencyMs": 1551.8,
+    "tokens": 395
+  },
+  {
+    "case": "case-0090",
+    "latencyMs": 1477.3,
+    "tokens": 525
+  },
+  {
+    "case": "case-0091",
+    "latencyMs": 365.0,
+    "tokens": 539
+  },
+  {
+    "case": "case-0092",
+    "latencyMs": 2384.0,
+    "tokens": 517
+  },
+  {
+    "case": "case-0093",
+    "latencyMs": 1194.5,
+    "tokens": 359
+  },
+  {
+    "case": "case-0094",
+    "latencyMs": 279.3,
+    "tokens": 144
+  },
+  {
+    "case": "case-0095",
+    "latencyMs": 1819.2,
+    "tokens": 798
+  },
+  {
+    "case": "case-0096",
+    "latencyMs": 694.2,
+    "tokens": 888
+  },
+  {
+    "case": "case-0097",
+    "latencyMs": 1685.6,
+    "tokens": 568
+  },
+  {
+    "case": "case-0098",
+    "latencyMs": 133.6,
+    "tokens": 580
+  },
+  {
+    "case": "case-0099",
+    "latencyMs": 919.3,
+    "tokens": 746
+  },
+  {
+    "case": "case-0100",
+    "latencyMs": 1340.2,
+    "tokens": 67
+  },
+  {
+    "case": "case-0101",
+    "latencyMs": 1838.9,
+    "tokens": 345
+  },
+  {
+    "case": "case-0102",
+    "latencyMs": 2350.1,
+    "tokens": 133
+  },
+  {
+    "case": "case-0103",
+    "latencyMs": 1695.2,
+    "tokens": 307
+  },
+  {
+    "case": "case-0104",
+    "latencyMs": 1282.7,
+    "tokens": 211
+  },
+  {
+    "case": "case-0105",
+    "latencyMs": 905.2,
+    "tokens": 268
+  },
+  {
+    "case": "case-0106",
+    "latencyMs": 1315.6,
+    "tokens": 837
+  },
+  {
+    "case": "case-0107",
+    "latencyMs": 1246.3,
+    "tokens": 691
+  },
+  {
+    "case": "case-0108",
+    "latencyMs": 597.5,
+    "tokens": 870
+  },
+  {
+    "case": "case-0109",
+    "latencyMs": 1909.1,
+    "tokens": 816
+  },
+  {
+    "case": "case-0110",
+    "latencyMs": 2058.1,
+    "tokens": 865
+  },
+  {
+    "case": "case-0111",
+    "latencyMs": 635.4,
+    "tokens": 450
+  },
+  {
+    "case": "case-0112",
+    "latencyMs": 1796.5,
+    "tokens": 272
+  },
+  {
+    "case": "case-0113",
+    "latencyMs": 543.8,
+    "tokens": 544
+  },
+  {
+    "case": "case-0114",
+    "latencyMs": 904.9,
+    "tokens": 69
+  },
+  {
+    "case": "case-0115",
+    "latencyMs": 2375.9,
+    "tokens": 849
+  },
+  {
+    "case": "case-0116",
+    "latencyMs": 728.3,
+    "tokens": 305
+  },
+  {
+    "case": "case-0117",
+    "latencyMs": 529.3,
+    "tokens": 659
+  },
+  {
+    "case": "case-0118",
+    "latencyMs": 2299.1,
+    "tokens": 497
+  },
+  {
+    "case": "case-0119",
+    "latencyMs": 1955.9,
+    "tokens": 780
+  },
+  {
+    "case": "case-0120",
+    "latencyMs": 2372.2,
+    "tokens": 413
+  },
+  {
+    "case": "case-0121",
+    "latencyMs": 266.8,
+    "tokens": 144
+  },
+  {
+    "case": "case-0122",
+    "latencyMs": 606.3,
+    "tokens": 241
+  },
+  {
+    "case": "case-0123",
+    "latencyMs": 863.6,
+    "tokens": 534
+  },
+  {
+    "case": "case-0124",
+    "latencyMs": 1527.8,
+    "tokens": 664
+  },
+  {
+    "case": "case-0125",
+    "latencyMs": 2029.8,
+    "tokens": 530
+  },
+  {
+    "case": "case-0126",
+    "latencyMs": 2189.3,
+    "tokens": 392
+  },
+  {
+    "case": "case-0127",
+    "latencyMs": 1935.2,
+    "tokens": 126
+  },
+  {
+    "case": "case-0128",
+    "latencyMs": 2016.4,
+    "tokens": 162
+  },
+  {
+    "case": "case-0129",
+    "latencyMs": 2190.7,
+    "tokens": 841
+  },
+  {
+    "case": "case-0130",
+    "latencyMs": 1730.7,
+    "tokens": 244
+  },
+  {
+    "case": "case-0131",
+    "latencyMs": 1189.0,
+    "tokens": 222
+  },
+  {
+    "case": "case-0132",
+    "latencyMs": 1086.7,
+    "tokens": 691
+  },
+  {
+    "case": "case-0133",
+    "latencyMs": 851.4,
+    "tokens": 860
+  },
+  {
+    "case": "case-0134",
+    "latencyMs": 2275.1,
+    "tokens": 779
+  },
+  {
+    "case": "case-0135",
+    "latencyMs": 998.3,
+    "tokens": 451
+  },
+  {
+    "case": "case-0136",
+    "latencyMs": 1804.6,
+    "tokens": 126
+  },
+  {
+    "case": "case-0137",
+    "latencyMs": 1761.5,
+    "tokens": 214
+  },
+  {
+    "case": "case-0138",
+    "latencyMs": 2384.0,
+    "tokens": 68
+  },
+  {
+    "case": "case-0139",
+    "latencyMs": 430.7,
+    "tokens": 516
+  },
+  {
+    "case": "case-0140",
+    "latencyMs": 1951.1,
+    "tokens": 189
+  },
+  {
+    "case": "case-0141",
+    "latencyMs": 1498.9,
+    "tokens": 650
+  },
+  {
+    "case": "case-0142",
+    "latencyMs": 2354.3,
+    "tokens": 713
+  },
+  {
+    "case": "case-0143",
+    "latencyMs": 2254.9,
+    "tokens": 199
+  },
+  {
+    "case": "case-0144",
+    "latencyMs": 1352.9,
+    "tokens": 174
+  },
+  {
+    "case": "case-0145",
+    "latencyMs": 129.6,
+    "tokens": 858
+  },
+  {
+    "case": "case-0146",
+    "latencyMs": 2332.5,
+    "tokens": 705
+  },
+  {
+    "case": "case-0147",
+    "latencyMs": 318.4,
+    "tokens": 807
+  },
+  {
+    "case": "case-0148",
+    "latencyMs": 2246.0,
+    "tokens": 484
+  },
+  {
+    "case": "case-0149",
+    "latencyMs": 2368.8,
+    "tokens": 239
+  },
+  {
+    "case": "case-0150",
+    "latencyMs": 1996.7,
+    "tokens": 256
+  },
+  {
+    "case": "case-0151",
+    "latencyMs": 144.9,
+    "tokens": 257
+  },
+  {
+    "case": "case-0152",
+    "latencyMs": 759.7,
+    "tokens": 286
+  },
+  {
+    "case": "case-0153",
+    "latencyMs": 1851.7,
+    "tokens": 373
+  },
+  {
+    "case": "case-0154",
+    "latencyMs": 681.7,
+    "tokens": 469
+  },
+  {
+    "case": "case-0155",
+    "latencyMs": 2015.3,
+    "tokens": 102
+  },
+  {
+    "case": "case-0156",
+    "latencyMs": 2191.2,
+    "tokens": 402
+  },
+  {
+    "case": "case-0157",
+    "latencyMs": 2162.7,
+    "tokens": 718
+  },
+  {
+    "case": "case-0158",
+    "latencyMs": 1433.4,
+    "tokens": 569
+  },
+  {
+    "case": "case-0159",
+    "latencyMs": 1055.9,
+    "tokens": 553
+  },
+  {
+    "case": "case-0160",
+    "latencyMs": 383.4,
+    "tokens": 195
+  },
+  {
+    "case": "case-0161",
+    "latencyMs": 1294.5,
+    "tokens": 59
+  },
+  {
+    "case": "case-0162",
+    "latencyMs": 2104.9,
+    "tokens": 835
+  },
+  {
+    "case": "case-0163",
+    "latencyMs": 504.8,
+    "tokens": 44
+  },
+  {
+    "case": "case-0164",
+    "latencyMs": 1880.4,
+    "tokens": 193
+  },
+  {
+    "case": "case-0165",
+    "latencyMs": 479.8,
+    "tokens": 524
+  },
+  {
+    "case": "case-0166",
+    "latencyMs": 1516.3,
+    "tokens": 163
+  },
+  {
+    "case": "case-0167",
+    "latencyMs": 1371.0,
+    "tokens": 373
+  },
+  {
+    "case": "case-0168",
+    "latencyMs": 1663.0,
+    "tokens": 583
+  },
+  {
+    "case": "case-0169",
+    "latencyMs": 1368.6,
+    "tokens": 843
+  },
+  {
+    "case": "case-0170",
+    "latencyMs": 1881.5,
+    "tokens": 613
+  },
+  {
+    "case": "case-0171",
+    "latencyMs": 211.8,
+    "tokens": 235
+  },
+  {
+    "case": "case-0172",
+    "latencyMs": 722.4,
+    "tokens": 830
+  },
+  {
+    "case": "case-0173",
+    "latencyMs": 306.8,
+    "tokens": 503
+  },
+  {
+    "case": "case-0174",
+    "latencyMs": 1383.2,
+    "tokens": 818
+  },
+  {
+    "case": "case-0175",
+    "latencyMs": 2154.1,
+    "tokens": 104
+  },
+  {
+    "case": "case-0176",
+    "latencyMs": 1108.3,
+    "tokens": 667
+  },
+  {
+    "case": "case-0177",
+    "latencyMs": 2338.2,
+    "tokens": 660
+  },
+  {
+    "case": "case-0178",
+    "latencyMs": 1268.2,
+    "tokens": 749
+  },
+  {
+    "case": "case-0179",
+    "latencyMs": 723.1,
+    "tokens": 560
+  },
+  {
+    "case": "case-0180",
+    "latencyMs": 1317.2,
+    "tokens": 529
+  },
+  {
+    "case": "case-0181",
+    "latencyMs": 1258.0,
+    "tokens": 293
+  },
+  {
+    "case": "case-0182",
+    "latencyMs": 1702.2,
+    "tokens": 305
+  },
+  {
+    "case": "case-0183",
+    "latencyMs": 2220.9,
+    "tokens": 247
+  },
+  {
+    "case": "case-0184",
+    "latencyMs": 2028.8,
+    "tokens": 180
+  },
+  {
+    "case": "case-0185",
+    "latencyMs": 1046.6,
+    "tokens": 441
+  },
+  {
+    "case": "case-0186",
+    "latencyMs": 1105.7,
+    "tokens": 114
+  },
+  {
+    "case": "case-0187",
+    "latencyMs": 1637.1,
+    "tokens": 478
+  },
+  {
+    "case": "case-0188",
+    "latencyMs": 249.6,
+    "tokens": 725
+  },
+  {
+    "case": "case-0189",
+    "latencyMs": 782.4,
+    "tokens": 165
+  },
+  {
+    "case": "case-0190",
+    "latencyMs": 2161.1,
+    "tokens": 198
+  },
+  {
+    "case": "case-0191",
+    "latencyMs": 2259.7,
+    "tokens": 698
+  },
+  {
+    "case": "case-0192",
+    "latencyMs": 1611.8,
+    "tokens": 186
+  },
+  {
+    "case": "case-0193",
+    "latencyMs": 667.2,
+    "tokens": 180
+  },
+  {
+    "case": "case-0194",
+    "latencyMs": 2324.7,
+    "tokens": 264
+  },
+  {
+    "case": "case-0195",
+    "latencyMs": 1812.3,
+    "tokens": 136
+  },
+  {
+    "case": "case-0196",
+    "latencyMs": 1004.0,
+    "tokens": 538
+  },
+  {
+    "case": "case-0197",
+    "latencyMs": 457.7,
+    "tokens": 723
+  },
+  {
+    "case": "case-0198",
+    "latencyMs": 2011.3,
+    "tokens": 205
+  },
+  {
+    "case": "case-0199",
+    "latencyMs": 1718.7,
+    "tokens": 567
+  },
+  {
+    "case": "case-0200",
+    "latencyMs": 1016.8,
+    "tokens": 471
+  },
+  {
+    "case": "case-0201",
+    "latencyMs": 534.1,
+    "tokens": 366
+  },
+  {
+    "case": "case-0202",
+    "latencyMs": 293.9,
+    "tokens": 414
+  },
+  {
+    "case": "case-0203",
+    "latencyMs": 125.2,
+    "tokens": 607
+  },
+  {
+    "case": "case-0204",
+    "latencyMs": 1144.1,
+    "tokens": 760
+  },
+  {
+    "case": "case-0205",
+    "latencyMs": 122.0,
+    "tokens": 379
+  },
+  {
+    "case": "case-0206",
+    "latencyMs": 1280.4,
+    "tokens": 342
+  },
+  {
+    "case": "case-0207",
+    "latencyMs": 1268.4,
+    "tokens": 105
+  },
+  {
+    "case": "case-0208",
+    "latencyMs": 341.8,
+    "tokens": 847
+  },
+  {
+    "case": "case-0209",
+    "latencyMs": 610.2,
+    "tokens": 147
+  },
+  {
+    "case": "case-0210",
+    "latencyMs": 275.0,
+    "tokens": 318
+  },
+  {
+    "case": "case-0211",
+    "latencyMs": 171.8,
+    "tokens": 837
+  },
+  {
+    "case": "case-0212",
+    "latencyMs": 501.2,
+    "tokens": 813
+  },
+  {
+    "case": "case-0213",
+    "latencyMs": 380.6,
+    "tokens": 472
+  },
+  {
+    "case": "case-0214",
+    "latencyMs": 2051.0,
+    "tokens": 732
+  },
+  {
+    "case": "case-0215",
+    "latencyMs": 1980.0,
+    "tokens": 304
+  },
+  {
+    "case": "case-0216",
+    "latencyMs": 1021.8,
+    "tokens": 589
+  },
+  {
+    "case": "case-0217",
+    "latencyMs": 2212.5,
+    "tokens": 624
+  },
+  {
+    "case": "case-0218",
+    "latencyMs": 1227.5,
+    "tokens": 374
+  },
+  {
+    "case": "case-0219",
+    "latencyMs": 287.6,
+    "tokens": 98
+  },
+  {
+    "case": "case-0220",
+    "latencyMs": 1935.0,
+    "tokens": 227
+  },
+  {
+    "case": "case-0221",
+    "latencyMs": 1066.7,
+    "tokens": 114
+  },
+  {
+    "case": "case-0222",
+    "latencyMs": 703.9,
+    "tokens": 57
+  },
+  {
+    "case": "case-0223",
+    "latencyMs": 1551.9,
+    "tokens": 860
+  },
+  {
+    "case": "case-0224",
+    "latencyMs": 684.5,
+    "tokens": 662
+  },
+  {
+    "case": "case-0225",
+    "latencyMs": 2066.5,
+    "tokens": 108
+  },
+  {
+    "case": "case-0226",
+    "latencyMs": 693.5,
+    "tokens": 164
+  },
+  {
+    "case": "case-0227",
+    "latencyMs": 1132.8,
+    "tokens": 387
+  },
+  {
+    "case": "case-0228",
+    "latencyMs": 2386.8,
+    "tokens": 467
+  },
+  {
+    "case": "case-0229",
+    "latencyMs": 2229.9,
+    "tokens": 314
+  },
+  {
+    "case": "case-0230",
+    "latencyMs": 1522.4,
+    "tokens": 84
+  },
+  {
+    "case": "case-0231",
+    "latencyMs": 1302.4,
+    "tokens": 284
+  },
+  {
+    "case": "case-0232",
+    "latencyMs": 2256.5,
+    "tokens": 205
+  },
+  {
+    "case": "case-0233",
+    "latencyMs": 687.6,
+    "tokens": 225
+  },
+  {
+    "case": "case-0234",
+    "latencyMs": 548.1,
+    "tokens": 359
+  },
+  {
+    "case": "case-0235",
+    "latencyMs": 1538.5,
+    "tokens": 583
+  },
+  {
+    "case": "case-0236",
+    "latencyMs": 1842.0,
+    "tokens": 336
+  },
+  {
+    "case": "case-0237",
+    "latencyMs": 1114.0,
+    "tokens": 728
+  },
+  {
+    "case": "case-0238",
+    "latencyMs": 492.7,
+    "tokens": 395
+  },
+  {
+    "case": "case-0239",
+    "latencyMs": 1944.5,
+    "tokens": 296
+  },
+  {
+    "case": "case-0240",
+    "latencyMs": 165.7,
+    "tokens": 58
+  },
+  {
+    "case": "case-0241",
+    "latencyMs": 1780.7,
+    "tokens": 604
+  },
+  {
+    "case": "case-0242",
+    "latencyMs": 2349.1,
+    "tokens": 566
+  },
+  {
+    "case": "case-0243",
+    "latencyMs": 1181.4,
+    "tokens": 497
+  },
+  {
+    "case": "case-0244",
+    "latencyMs": 326.6,
+    "tokens": 878
+  },
+  {
+    "case": "case-0245",
+    "latencyMs": 1588.2,
+    "tokens": 712
+  },
+  {
+    "case": "case-0246",
+    "latencyMs": 1228.4,
+    "tokens": 894
+  },
+  {
+    "case": "case-0247",
+    "latencyMs": 2141.8,
+    "tokens": 558
+  },
+  {
+    "case": "case-0248",
+    "latencyMs": 794.1,
+    "tokens": 260
+  },
+  {
+    "case": "case-0249",
+    "latencyMs": 2359.3,
+    "tokens": 390
+  },
+  {
+    "case": "case-0250",
+    "latencyMs": 540.8,
+    "tokens": 763
+  },
+  {
+    "case": "case-0251",
+    "latencyMs": 1770.9,
+    "tokens": 183
+  },
+  {
+    "case": "case-0252",
+    "latencyMs": 1018.9,
+    "tokens": 395
+  },
+  {
+    "case": "case-0253",
+    "latencyMs": 2358.0,
+    "tokens": 897
+  },
+  {
+    "case": "case-0254",
+    "latencyMs": 381.2,
+    "tokens": 112
+  },
+  {
+    "case": "case-0255",
+    "latencyMs": 1531.0,
+    "tokens": 301
+  },
+  {
+    "case": "case-0256",
+    "latencyMs": 1079.3,
+    "tokens": 96
+  },
+  {
+    "case": "case-0257",
+    "latencyMs": 276.0,
+    "tokens": 430
+  },
+  {
+    "case": "case-0258",
+    "latencyMs": 2099.6,
+    "tokens": 726
+  },
+  {
+    "case": "case-0259",
+    "latencyMs": 2332.6,
+    "tokens": 653
+  },
+  {
+    "case": "case-0260",
+    "latencyMs": 641.9,
+    "tokens": 340
+  },
+  {
+    "case": "case-0261",
+    "latencyMs": 185.0,
+    "tokens": 229
+  },
+  {
+    "case": "case-0262",
+    "latencyMs": 445.5,
+    "tokens": 496
+  },
+  {
+    "case": "case-0263",
+    "latencyMs": 88.4,
+    "tokens": 412
+  },
+  {
+    "case": "case-0264",
+    "latencyMs": 2311.3,
+    "tokens": 600
+  },
+  {
+    "case": "case-0265",
+    "latencyMs": 830.6,
+    "tokens": 75
+  },
+  {
+    "case": "case-0266",
+    "latencyMs": 2320.3,
+    "tokens": 356
+  },
+  {
+    "case": "case-0267",
+    "latencyMs": 585.4,
+    "tokens": 227
+  },
+  {
+    "case": "case-0268",
+    "latencyMs": 82.5,
+    "tokens": 430
+  },
+  {
+    "case": "case-0269",
+    "latencyMs": 274.6,
+    "tokens": 325
+  },
+  {
+    "case": "case-0270",
+    "latencyMs": 1246.4,
+    "tokens": 245
+  },
+  {
+    "case": "case-0271",
+    "latencyMs": 655.8,
+    "tokens": 834
+  },
+  {
+    "case": "case-0272",
+    "latencyMs": 91.5,
+    "tokens": 310
+  },
+  {
+    "case": "case-0273",
+    "latencyMs": 1975.5,
+    "tokens": 187
+  },
+  {
+    "case": "case-0274",
+    "latencyMs": 1006.9,
+    "tokens": 82
+  },
+  {
+    "case": "case-0275",
+    "latencyMs": 994.0,
+    "tokens": 346
+  },
+  {
+    "case": "case-0276",
+    "latencyMs": 785.8,
+    "tokens": 278
+  },
+  {
+    "case": "case-0277",
+    "latencyMs": 276.0,
+    "tokens": 581
+  },
+  {
+    "case": "case-0278",
+    "latencyMs": 2059.5,
+    "tokens": 198
+  },
+  {
+    "case": "case-0279",
+    "latencyMs": 1605.5,
+    "tokens": 773
+  },
+  {
+    "case": "case-0280",
+    "latencyMs": 1899.0,
+    "tokens": 650
+  },
+  {
+    "case": "case-0281",
+    "latencyMs": 983.7,
+    "tokens": 373
+  },
+  {
+    "case": "case-0282",
+    "latencyMs": 1752.0,
+    "tokens": 546
+  },
+  {
+    "case": "case-0283",
+    "latencyMs": 426.8,
+    "tokens": 781
+  },
+  {
+    "case": "case-0284",
+    "latencyMs": 1515.4,
+    "tokens": 188
+  },
+  {
+    "case": "case-0285",
+    "latencyMs": 181.6,
+    "tokens": 895
+  },
+  {
+    "case": "case-0286",
+    "latencyMs": 1738.8,
+    "tokens": 565
+  },
+  {
+    "case": "case-0287",
+    "latencyMs": 1535.4,
+    "tokens": 791
+  },
+  {
+    "case": "case-0288",
+    "latencyMs": 1706.4,
+    "tokens": 557
+  },
+  {
+    "case": "case-0289",
+    "latencyMs": 403.2,
+    "tokens": 576
+  },
+  {
+    "case": "case-0290",
+    "latencyMs": 1826.7,
+    "tokens": 622
+  },
+  {
+    "case": "case-0291",
+    "latencyMs": 2017.1,
+    "tokens": 863
+  },
+  {
+    "case": "case-0292",
+    "latencyMs": 117.3,
+    "tokens": 742
+  },
+  {
+    "case": "case-0293",
+    "latencyMs": 1435.0,
+    "tokens": 768
+  },
+  {
+    "case": "case-0294",
+    "latencyMs": 1664.3,
+    "tokens": 749
+  },
+  {
+    "case": "case-0295",
+    "latencyMs": 1571.5,
+    "tokens": 127
+  },
+  {
+    "case": "case-0296",
+    "latencyMs": 152.3,
+    "tokens": 176
+  },
+  {
+    "case": "case-0297",
+    "latencyMs": 1558.1,
+    "tokens": 147
+  },
+  {
+    "case": "case-0298",
+    "latencyMs": 953.8,
+    "tokens": 502
+  },
+  {
+    "case": "case-0299",
+    "latencyMs": 1375.8,
+    "tokens": 682
+  },
+  {
+    "case": "case-0300",
+    "latencyMs": 123.7,
+    "tokens": 584
+  },
+  {
+    "case": "case-0301",
+    "latencyMs": 1659.1,
+    "tokens": 541
+  },
+  {
+    "case": "case-0302",
+    "latencyMs": 692.0,
+    "tokens": 507
+  },
+  {
+    "case": "case-0303",
+    "latencyMs": 1930.7,
+    "tokens": 806
+  },
+  {
+    "case": "case-0304",
+    "latencyMs": 2243.4,
+    "tokens": 588
+  },
+  {
+    "case": "case-0305",
+    "latencyMs": 293.3,
+    "tokens": 578
+  },
+  {
+    "case": "case-0306",
+    "latencyMs": 233.2,
+    "tokens": 794
+  },
+  {
+    "case": "case-0307",
+    "latencyMs": 1179.4,
+    "tokens": 868
+  },
+  {
+    "case": "case-0308",
+    "latencyMs": 252.7,
+    "tokens": 311
+  },
+  {
+    "case": "case-0309",
+    "latencyMs": 624.7,
+    "tokens": 814
+  },
+  {
+    "case": "case-0310",
+    "latencyMs": 556.1,
+    "tokens": 797
+  },
+  {
+    "case": "case-0311",
+    "latencyMs": 1587.8,
+    "tokens": 511
+  },
+  {
+    "case": "case-0312",
+    "latencyMs": 1226.0,
+    "tokens": 431
+  },
+  {
+    "case": "case-0313",
+    "latencyMs": 258.0,
+    "tokens": 740
+  },
+  {
+    "case": "case-0314",
+    "latencyMs": 746.6,
+    "tokens": 87
+  },
+  {
+    "case": "case-0315",
+    "latencyMs": 1511.4,
+    "tokens": 698
+  },
+  {
+    "case": "case-0316",
+    "latencyMs": 540.0,
+    "tokens": 654
+  },
+  {
+    "case": "case-0317",
+    "latencyMs": 422.0,
+    "tokens": 300
+  },
+  {
+    "case": "case-0318",
+    "latencyMs": 1591.6,
+    "tokens": 749
+  },
+  {
+    "case": "case-0319",
+    "latencyMs": 786.2,
+    "tokens": 621
+  },
+  {
+    "case": "case-0320",
+    "latencyMs": 389.6,
+    "tokens": 533
+  },
+  {
+    "case": "case-0321",
+    "latencyMs": 220.7,
+    "tokens": 315
+  },
+  {
+    "case": "case-0322",
+    "latencyMs": 2336.2,
+    "tokens": 141
+  },
+  {
+    "case": "case-0323",
+    "latencyMs": 1685.9,
+    "tokens": 731
+  },
+  {
+    "case": "case-0324",
+    "latencyMs": 1215.9,
+    "tokens": 765
+  },
+  {
+    "case": "case-0325",
+    "latencyMs": 1278.4,
+    "tokens": 515
+  },
+  {
+    "case": "case-0326",
+    "latencyMs": 1160.9,
+    "tokens": 825
+  },
+  {
+    "case": "case-0327",
+    "latencyMs": 354.9,
+    "tokens": 602
+  },
+  {
+    "case": "case-0328",
+    "latencyMs": 542.3,
+    "tokens": 127
+  },
+  {
+    "case": "case-0329",
+    "latencyMs": 2252.1,
+    "tokens": 57
+  },
+  {
+    "case": "case-0330",
+    "latencyMs": 751.8,
+    "tokens": 118
+  },
+  {
+    "case": "case-0331",
+    "latencyMs": 1982.2,
+    "tokens": 500
+  },
+  {
+    "case": "case-0332",
+    "latencyMs": 2386.0,
+    "tokens": 436
+  },
+  {
+    "case": "case-0333",
+    "latencyMs": 566.8,
+    "tokens": 255
+  },
+  {
+    "case": "case-0334",
+    "latencyMs": 253.1,
+    "tokens": 132
+  },
+  {
+    "case": "case-0335",
+    "latencyMs": 408.8,
+    "tokens": 576
+  },
+  {
+    "case": "case-0336",
+    "latencyMs": 687.4,
+    "tokens": 408
+  },
+  {
+    "case": "case-0337",
+    "latencyMs": 387.6,
+    "tokens": 879
+  },
+  {
+    "case": "case-0338",
+    "latencyMs": 1545.5,
+    "tokens": 326
+  },
+  {
+    "case": "case-0339",
+    "latencyMs": 2137.5,
+    "tokens": 760
+  },
+  {
+    "case": "case-0340",
+    "latencyMs": 927.2,
+    "tokens": 549
+  },
+  {
+    "case": "case-0341",
+    "latencyMs": 2162.7,
+    "tokens": 537
+  },
+  {
+    "case": "case-0342",
+    "latencyMs": 994.3,
+    "tokens": 202
+  },
+  {
+    "case": "case-0343",
+    "latencyMs": 88.3,
+    "tokens": 543
+  },
+  {
+    "case": "case-0344",
+    "latencyMs": 1661.3,
+    "tokens": 455
+  },
+  {
+    "case": "case-0345",
+    "latencyMs": 780.5,
+    "tokens": 184
+  },
+  {
+    "case": "case-0346",
+    "latencyMs": 1045.5,
+    "tokens": 425
+  },
+  {
+    "case": "case-0347",
+    "latencyMs": 813.3,
+    "tokens": 900
+  },
+  {
+    "case": "case-0348",
+    "latencyMs": 848.7,
+    "tokens": 372
+  },
+  {
+    "case": "case-0349",
+    "latencyMs": 1821.7,
+    "tokens": 899
+  },
+  {
+    "case": "case-0350",
+    "latencyMs": 1004.0,
+    "tokens": 240
+  },
+  {
+    "case": "case-0351",
+    "latencyMs": 1734.2,
+    "tokens": 797
+  },
+  {
+    "case": "case-0352",
+    "latencyMs": 752.4,
+    "tokens": 421
+  },
+  {
+    "case": "case-0353",
+    "latencyMs": 230.7,
+    "tokens": 439
+  },
+  {
+    "case": "case-0354",
+    "latencyMs": 2397.2,
+    "tokens": 643
+  },
+  {
+    "case": "case-0355",
+    "latencyMs": 257.2,
+    "tokens": 478
+  },
+  {
+    "case": "case-0356",
+    "latencyMs": 1833.1,
+    "tokens": 89
+  },
+  {
+    "case": "case-0357",
+    "latencyMs": 731.1,
+    "tokens": 92
+  },
+  {
+    "case": "case-0358",
+    "latencyMs": 2016.4,
+    "tokens": 332
+  },
+  {
+    "case": "case-0359",
+    "latencyMs": 1553.1,
+    "tokens": 192
+  },
+  {
+    "case": "case-0360",
+    "latencyMs": 658.4,
+    "tokens": 312
+  },
+  {
+    "case": "case-0361",
+    "latencyMs": 1092.1,
+    "tokens": 363
+  },
+  {
+    "case": "case-0362",
+    "latencyMs": 520.4,
+    "tokens": 422
+  },
+  {
+    "case": "case-0363",
+    "latencyMs": 1901.5,
+    "tokens": 478
+  },
+  {
+    "case": "case-0364",
+    "latencyMs": 2131.5,
+    "tokens": 871
+  },
+  {
+    "case": "case-0365",
+    "latencyMs": 1847.0,
+    "tokens": 449
+  },
+  {
+    "case": "case-0366",
+    "latencyMs": 2199.1,
+    "tokens": 607
+  },
+  {
+    "case": "case-0367",
+    "latencyMs": 1354.2,
+    "tokens": 776
+  },
+  {
+    "case": "case-0368",
+    "latencyMs": 266.9,
+    "tokens": 789
+  },
+  {
+    "case": "case-0369",
+    "latencyMs": 1033.3,
+    "tokens": 669
+  },
+  {
+    "case": "case-0370",
+    "latencyMs": 1826.2,
+    "tokens": 699
+  },
+  {
+    "case": "case-0371",
+    "latencyMs": 2097.2,
+    "tokens": 537
+  },
+  {
+    "case": "case-0372",
+    "latencyMs": 193.6,
+    "tokens": 603
+  },
+  {
+    "case": "case-0373",
+    "latencyMs": 375.4,
+    "tokens": 523
+  },
+  {
+    "case": "case-0374",
+    "latencyMs": 1042.5,
+    "tokens": 328
+  },
+  {
+    "case": "case-0375",
+    "latencyMs": 770.8,
+    "tokens": 796
+  },
+  {
+    "case": "case-0376",
+    "latencyMs": 1793.9,
+    "tokens": 708
+  },
+  {
+    "case": "case-0377",
+    "latencyMs": 683.6,
+    "tokens": 711
+  },
+  {
+    "case": "case-0378",
+    "latencyMs": 633.7,
+    "tokens": 534
+  },
+  {
+    "case": "case-0379",
+    "latencyMs": 1373.0,
+    "tokens": 443
+  },
+  {
+    "case": "case-0380",
+    "latencyMs": 357.8,
+    "tokens": 698
+  },
+  {
+    "case": "case-0381",
+    "latencyMs": 455.0,
+    "tokens": 252
+  },
+  {
+    "case": "case-0382",
+    "latencyMs": 1241.4,
+    "tokens": 871
+  },
+  {
+    "case": "case-0383",
+    "latencyMs": 1233.2,
+    "tokens": 265
+  },
+  {
+    "case": "case-0384",
+    "latencyMs": 1130.9,
+    "tokens": 380
+  },
+  {
+    "case": "case-0385",
+    "latencyMs": 2391.8,
+    "tokens": 500
+  },
+  {
+    "case": "case-0386",
+    "latencyMs": 1071.6,
+    "tokens": 600
+  },
+  {
+    "case": "case-0387",
+    "latencyMs": 526.4,
+    "tokens": 132
+  },
+  {
+    "case": "case-0388",
+    "latencyMs": 485.3,
+    "tokens": 609
+  },
+  {
+    "case": "case-0389",
+    "latencyMs": 291.3,
+    "tokens": 284
+  },
+  {
+    "case": "case-0390",
+    "latencyMs": 934.5,
+    "tokens": 868
+  },
+  {
+    "case": "case-0391",
+    "latencyMs": 1401.5,
+    "tokens": 60
+  },
+  {
+    "case": "case-0392",
+    "latencyMs": 1819.2,
+    "tokens": 462
+  },
+  {
+    "case": "case-0393",
+    "latencyMs": 968.2,
+    "tokens": 803
+  },
+  {
+    "case": "case-0394",
+    "latencyMs": 1296.1,
+    "tokens": 425
+  },
+  {
+    "case": "case-0395",
+    "latencyMs": 707.0,
+    "tokens": 810
+  },
+  {
+    "case": "case-0396",
+    "latencyMs": 224.0,
+    "tokens": 324
+  },
+  {
+    "case": "case-0397",
+    "latencyMs": 1412.3,
+    "tokens": 408
+  },
+  {
+    "case": "case-0398",
+    "latencyMs": 372.0,
+    "tokens": 555
+  },
+  {
+    "case": "case-0399",
+    "latencyMs": 1307.8,
+    "tokens": 849
+  },
+  {
+    "case": "case-0400",
+    "latencyMs": 2081.8,
+    "tokens": 261
+  },
+  {
+    "case": "case-0401",
+    "latencyMs": 294.8,
+    "tokens": 294
+  },
+  {
+    "case": "case-0402",
+    "latencyMs": 972.2,
+    "tokens": 701
+  },
+  {
+    "case": "case-0403",
+    "latencyMs": 1114.4,
+    "tokens": 359
+  },
+  {
+    "case": "case-0404",
+    "latencyMs": 2048.9,
+    "tokens": 62
+  },
+  {
+    "case": "case-0405",
+    "latencyMs": 375.2,
+    "tokens": 475
+  },
+  {
+    "case": "case-0406",
+    "latencyMs": 1726.1,
+    "tokens": 863
+  },
+  {
+    "case": "case-0407",
+    "latencyMs": 1178.0,
+    "tokens": 641
+  },
+  {
+    "case": "case-0408",
+    "latencyMs": 1216.4,
+    "tokens": 114
+  },
+  {
+    "case": "case-0409",
+    "latencyMs": 988.3,
+    "tokens": 885
+  },
+  {
+    "case": "case-0410",
+    "latencyMs": 1304.6,
+    "tokens": 519
+  },
+  {
+    "case": "case-0411",
+    "latencyMs": 2335.6,
+    "tokens": 294
+  },
+  {
+    "case": "case-0412",
+    "latencyMs": 1896.8,
+    "tokens": 269
+  },
+  {
+    "case": "case-0413",
+    "latencyMs": 438.2,
+    "tokens": 574
+  },
+  {
+    "case": "case-0414",
+    "latencyMs": 2334.8,
+    "tokens": 151
+  },
+  {
+    "case": "case-0415",
+    "latencyMs": 2264.3,
+    "tokens": 779
+  },
+  {
+    "case": "case-0416",
+    "latencyMs": 1706.3,
+    "tokens": 823
+  },
+  {
+    "case": "case-0417",
+    "latencyMs": 2156.1,
+    "tokens": 127
+  },
+  {
+    "case": "case-0418",
+    "latencyMs": 1359.5,
+    "tokens": 80
+  },
+  {
+    "case": "case-0419",
+    "latencyMs": 83.2,
+    "tokens": 168
+  },
+  {
+    "case": "case-0420",
+    "latencyMs": 619.6,
+    "tokens": 78
+  },
+  {
+    "case": "case-0421",
+    "latencyMs": 1577.6,
+    "tokens": 351
+  },
+  {
+    "case": "case-0422",
+    "latencyMs": 2312.8,
+    "tokens": 681
+  },
+  {
+    "case": "case-0423",
+    "latencyMs": 664.2,
+    "tokens": 691
+  },
+  {
+    "case": "case-0424",
+    "latencyMs": 1094.8,
+    "tokens": 822
+  },
+  {
+    "case": "case-0425",
+    "latencyMs": 340.1,
+    "tokens": 112
+  },
+  {
+    "case": "case-0426",
+    "latencyMs": 776.8,
+    "tokens": 636
+  },
+  {
+    "case": "case-0427",
+    "latencyMs": 524.7,
+    "tokens": 307
+  },
+  {
+    "case": "case-0428",
+    "latencyMs": 598.7,
+    "tokens": 655
+  },
+  {
+    "case": "case-0429",
+    "latencyMs": 82.7,
+    "tokens": 590
+  },
+  {
+    "case": "case-0430",
+    "latencyMs": 779.5,
+    "tokens": 511
+  },
+  {
+    "case": "case-0431",
+    "latencyMs": 726.4,
+    "tokens": 363
+  },
+  {
+    "case": "case-0432",
+    "latencyMs": 1575.4,
+    "tokens": 288
+  },
+  {
+    "case": "case-0433",
+    "latencyMs": 1182.7,
+    "tokens": 280
+  },
+  {
+    "case": "case-0434",
+    "latencyMs": 1349.0,
+    "tokens": 69
+  },
+  {
+    "case": "case-0435",
+    "latencyMs": 2308.6,
+    "tokens": 761
+  },
+  {
+    "case": "case-0436",
+    "latencyMs": 1587.2,
+    "tokens": 96
+  },
+  {
+    "case": "case-0437",
+    "latencyMs": 130.5,
+    "tokens": 550
+  },
+  {
+    "case": "case-0438",
+    "latencyMs": 2132.8,
+    "tokens": 702
+  },
+  {
+    "case": "case-0439",
+    "latencyMs": 1054.4,
+    "tokens": 303
+  },
+  {
+    "case": "case-0440",
+    "latencyMs": 608.6,
+    "tokens": 474
+  },
+  {
+    "case": "case-0441",
+    "latencyMs": 2226.4,
+    "tokens": 272
+  },
+  {
+    "case": "case-0442",
+    "latencyMs": 1223.6,
+    "tokens": 752
+  },
+  {
+    "case": "case-0443",
+    "latencyMs": 864.3,
+    "tokens": 470
+  },
+  {
+    "case": "case-0444",
+    "latencyMs": 920.6,
+    "tokens": 445
+  },
+  {
+    "case": "case-0445",
+    "latencyMs": 539.5,
+    "tokens": 856
+  },
+  {
+    "case": "case-0446",
+    "latencyMs": 757.7,
+    "tokens": 556
+  },
+  {
+    "case": "case-0447",
+    "latencyMs": 236.4,
+    "tokens": 547
+  },
+  {
+    "case": "case-0448",
+    "latencyMs": 2330.1,
+    "tokens": 359
+  },
+  {
+    "case": "case-0449",
+    "latencyMs": 1856.8,
+    "tokens": 238
+  },
+  {
+    "case": "case-0450",
+    "latencyMs": 615.5,
+    "tokens": 266
+  },
+  {
+    "case": "case-0451",
+    "latencyMs": 694.9,
+    "tokens": 342
+  },
+  {
+    "case": "case-0452",
+    "latencyMs": 332.9,
+    "tokens": 678
+  },
+  {
+    "case": "case-0453",
+    "latencyMs": 1230.2,
+    "tokens": 231
+  },
+  {
+    "case": "case-0454",
+    "latencyMs": 2159.8,
+    "tokens": 536
+  },
+  {
+    "case": "case-0455",
+    "latencyMs": 1047.5,
+    "tokens": 721
+  },
+  {
+    "case": "case-0456",
+    "latencyMs": 210.9,
+    "tokens": 649
+  },
+  {
+    "case": "case-0457",
+    "latencyMs": 419.6,
+    "tokens": 442
+  },
+  {
+    "case": "case-0458",
+    "latencyMs": 206.1,
+    "tokens": 64
+  },
+  {
+    "case": "case-0459",
+    "latencyMs": 2340.0,
+    "tokens": 185
+  },
+  {
+    "case": "case-0460",
+    "latencyMs": 1043.7,
+    "tokens": 766
+  },
+  {
+    "case": "case-0461",
+    "latencyMs": 219.5,
+    "tokens": 442
+  },
+  {
+    "case": "case-0462",
+    "latencyMs": 1123.2,
+    "tokens": 769
+  },
+  {
+    "case": "case-0463",
+    "latencyMs": 2129.9,
+    "tokens": 790
+  },
+  {
+    "case": "case-0464",
+    "latencyMs": 342.6,
+    "tokens": 121
+  },
+  {
+    "case": "case-0465",
+    "latencyMs": 2241.3,
+    "tokens": 377
+  },
+  {
+    "case": "case-0466",
+    "latencyMs": 522.4,
+    "tokens": 708
+  },
+  {
+    "case": "case-0467",
+    "latencyMs": 2251.2,
+    "tokens": 804
+  },
+  {
+    "case": "case-0468",
+    "latencyMs": 1164.9,
+    "tokens": 359
+  },
+  {
+    "case": "case-0469",
+    "latencyMs": 1621.5,
+    "tokens": 427
+  },
+  {
+    "case": "case-0470",
+    "latencyMs": 2026.8,
+    "tokens": 379
+  },
+  {
+    "case": "case-0471",
+    "latencyMs": 1106.4,
+    "tokens": 151
+  },
+  {
+    "case": "case-0472",
+    "latencyMs": 86.7,
+    "tokens": 326
+  },
+  {
+    "case": "case-0473",
+    "latencyMs": 267.4,
+    "tokens": 470
+  },
+  {
+    "case": "case-0474",
+    "latencyMs": 2296.8,
+    "tokens": 166
+  },
+  {
+    "case": "case-0475",
+    "latencyMs": 1381.8,
+    "tokens": 817
+  },
+  {
+    "case": "case-0476",
+    "latencyMs": 561.2,
+    "tokens": 405
+  },
+  {
+    "case": "case-0477",
+    "latencyMs": 1863.5,
+    "tokens": 356
+  },
+  {
+    "case": "case-0478",
+    "latencyMs": 1987.1,
+    "tokens": 482
+  },
+  {
+    "case": "case-0479",
+    "latencyMs": 283.6,
+    "tokens": 762
+  },
+  {
+    "case": "case-0480",
+    "latencyMs": 1178.4,
+    "tokens": 421
+  },
+  {
+    "case": "case-0481",
+    "latencyMs": 1336.3,
+    "tokens": 497
+  },
+  {
+    "case": "case-0482",
+    "latencyMs": 527.8,
+    "tokens": 412
+  },
+  {
+    "case": "case-0483",
+    "latencyMs": 1790.6,
+    "tokens": 525
+  },
+  {
+    "case": "case-0484",
+    "latencyMs": 150.3,
+    "tokens": 460
+  },
+  {
+    "case": "case-0485",
+    "latencyMs": 655.4,
+    "tokens": 680
+  },
+  {
+    "case": "case-0486",
+    "latencyMs": 1858.7,
+    "tokens": 81
+  },
+  {
+    "case": "case-0487",
+    "latencyMs": 951.3,
+    "tokens": 515
+  },
+  {
+    "case": "case-0488",
+    "latencyMs": 225.2,
+    "tokens": 103
+  },
+  {
+    "case": "case-0489",
+    "latencyMs": 676.3,
+    "tokens": 805
+  },
+  {
+    "case": "case-0490",
+    "latencyMs": 225.8,
+    "tokens": 660
+  },
+  {
+    "case": "case-0491",
+    "latencyMs": 866.6,
+    "tokens": 318
+  },
+  {
+    "case": "case-0492",
+    "latencyMs": 857.1,
+    "tokens": 671
+  },
+  {
+    "case": "case-0493",
+    "latencyMs": 181.1,
+    "tokens": 804
+  },
+  {
+    "case": "case-0494",
+    "latencyMs": 1742.6,
+    "tokens": 364
+  },
+  {
+    "case": "case-0495",
+    "latencyMs": 2224.2,
+    "tokens": 344
+  },
+  {
+    "case": "case-0496",
+    "latencyMs": 88.8,
+    "tokens": 813
+  },
+  {
+    "case": "case-0497",
+    "latencyMs": 1461.7,
+    "tokens": 864
+  },
+  {
+    "case": "case-0498",
+    "latencyMs": 1550.8,
+    "tokens": 106
+  },
+  {
+    "case": "case-0499",
+    "latencyMs": 136.3,
+    "tokens": 279
+  },
+  {
+    "case": "case-0500",
+    "latencyMs": 328.8,
+    "tokens": 772
+  },
+  {
+    "case": "case-0501",
+    "latencyMs": 2299.7,
+    "tokens": 834
+  },
+  {
+    "case": "case-0502",
+    "latencyMs": 976.7,
+    "tokens": 297
+  },
+  {
+    "case": "case-0503",
+    "latencyMs": 2199.4,
+    "tokens": 874
+  },
+  {
+    "case": "case-0504",
+    "latencyMs": 1224.9,
+    "tokens": 548
+  },
+  {
+    "case": "case-0505",
+    "latencyMs": 504.4,
+    "tokens": 861
+  },
+  {
+    "case": "case-0506",
+    "latencyMs": 2240.1,
+    "tokens": 350
+  },
+  {
+    "case": "case-0507",
+    "latencyMs": 1988.8,
+    "tokens": 831
+  },
+  {
+    "case": "case-0508",
+    "latencyMs": 431.1,
+    "tokens": 281
+  },
+  {
+    "case": "case-0509",
+    "latencyMs": 840.5,
+    "tokens": 367
+  },
+  {
+    "case": "case-0510",
+    "latencyMs": 1149.0,
+    "tokens": 842
+  },
+  {
+    "case": "case-0511",
+    "latencyMs": 1894.8,
+    "tokens": 120
+  },
+  {
+    "case": "case-0512",
+    "latencyMs": 1267.6,
+    "tokens": 441
+  },
+  {
+    "case": "case-0513",
+    "latencyMs": 1826.7,
+    "tokens": 293
+  },
+  {
+    "case": "case-0514",
+    "latencyMs": 1026.0,
+    "tokens": 705
+  },
+  {
+    "case": "case-0515",
+    "latencyMs": 158.6,
+    "tokens": 605
+  },
+  {
+    "case": "case-0516",
+    "latencyMs": 1343.5,
+    "tokens": 204
+  },
+  {
+    "case": "case-0517",
+    "latencyMs": 2354.2,
+    "tokens": 147
+  },
+  {
+    "case": "case-0518",
+    "latencyMs": 2371.8,
+    "tokens": 311
+  },
+  {
+    "case": "case-0519",
+    "latencyMs": 1529.1,
+    "tokens": 253
+  },
+  {
+    "case": "case-0520",
+    "latencyMs": 303.7,
+    "tokens": 550
+  },
+  {
+    "case": "case-0521",
+    "latencyMs": 2373.2,
+    "tokens": 497
+  },
+  {
+    "case": "case-0522",
+    "latencyMs": 481.8,
+    "tokens": 176
+  },
+  {
+    "case": "case-0523",
+    "latencyMs": 1047.1,
+    "tokens": 675
+  },
+  {
+    "case": "case-0524",
+    "latencyMs": 2147.7,
+    "tokens": 280
+  },
+  {
+    "case": "case-0525",
+    "latencyMs": 1815.3,
+    "tokens": 832
+  },
+  {
+    "case": "case-0526",
+    "latencyMs": 1621.5,
+    "tokens": 164
+  },
+  {
+    "case": "case-0527",
+    "latencyMs": 1889.0,
+    "tokens": 340
+  },
+  {
+    "case": "case-0528",
+    "latencyMs": 761.6,
+    "tokens": 620
+  },
+  {
+    "case": "case-0529",
+    "latencyMs": 701.0,
+    "tokens": 300
+  },
+  {
+    "case": "case-0530",
+    "latencyMs": 1792.3,
+    "tokens": 243
+  },
+  {
+    "case": "case-0531",
+    "latencyMs": 1099.4,
+    "tokens": 230
+  },
+  {
+    "case": "case-0532",
+    "latencyMs": 649.2,
+    "tokens": 197
+  },
+  {
+    "case": "case-0533",
+    "latencyMs": 732.7,
+    "tokens": 632
+  },
+  {
+    "case": "case-0534",
+    "latencyMs": 516.7,
+    "tokens": 106
+  },
+  {
+    "case": "case-0535",
+    "latencyMs": 998.9,
+    "tokens": 291
+  },
+  {
+    "case": "case-0536",
+    "latencyMs": 1257.0,
+    "tokens": 276
+  },
+  {
+    "case": "case-0537",
+    "latencyMs": 1587.2,
+    "tokens": 142
+  },
+  {
+    "case": "case-0538",
+    "latencyMs": 1595.7,
+    "tokens": 77
+  },
+  {
+    "case": "case-0539",
+    "latencyMs": 317.4,
+    "tokens": 526
+  },
+  {
+    "case": "case-0540",
+    "latencyMs": 2128.2,
+    "tokens": 276
+  },
+  {
+    "case": "case-0541",
+    "latencyMs": 2030.1,
+    "tokens": 422
+  },
+  {
+    "case": "case-0542",
+    "latencyMs": 173.6,
+    "tokens": 340
+  },
+  {
+    "case": "case-0543",
+    "latencyMs": 620.3,
+    "tokens": 91
+  },
+  {
+    "case": "case-0544",
+    "latencyMs": 519.8,
+    "tokens": 887
+  },
+  {
+    "case": "case-0545",
+    "latencyMs": 1433.0,
+    "tokens": 116
+  },
+  {
+    "case": "case-0546",
+    "latencyMs": 943.6,
+    "tokens": 222
+  },
+  {
+    "case": "case-0547",
+    "latencyMs": 1121.9,
+    "tokens": 306
+  },
+  {
+    "case": "case-0548",
+    "latencyMs": 1878.0,
+    "tokens": 720
+  },
+  {
+    "case": "case-0549",
+    "latencyMs": 2274.0,
+    "tokens": 148
+  },
+  {
+    "case": "case-0550",
+    "latencyMs": 1558.9,
+    "tokens": 766
+  },
+  {
+    "case": "case-0551",
+    "latencyMs": 1518.3,
+    "tokens": 262
+  },
+  {
+    "case": "case-0552",
+    "latencyMs": 166.9,
+    "tokens": 388
+  },
+  {
+    "case": "case-0553",
+    "latencyMs": 408.0,
+    "tokens": 248
+  },
+  {
+    "case": "case-0554",
+    "latencyMs": 2399.7,
+    "tokens": 79
+  },
+  {
+    "case": "case-0555",
+    "latencyMs": 1470.7,
+    "tokens": 707
+  },
+  {
+    "case": "case-0556",
+    "latencyMs": 2200.4,
+    "tokens": 874
+  },
+  {
+    "case": "case-0557",
+    "latencyMs": 106.4,
+    "tokens": 375
+  },
+  {
+    "case": "case-0558",
+    "latencyMs": 1028.9,
+    "tokens": 420
+  },
+  {
+    "case": "case-0559",
+    "latencyMs": 509.5,
+    "tokens": 359
+  },
+  {
+    "case": "case-0560",
+    "latencyMs": 260.8,
+    "tokens": 72
+  },
+  {
+    "case": "case-0561",
+    "latencyMs": 1925.1,
+    "tokens": 601
+  },
+  {
+    "case": "case-0562",
+    "latencyMs": 1201.7,
+    "tokens": 457
+  },
+  {
+    "case": "case-0563",
+    "latencyMs": 315.2,
+    "tokens": 444
+  },
+  {
+    "case": "case-0564",
+    "latencyMs": 1620.5,
+    "tokens": 198
+  },
+  {
+    "case": "case-0565",
+    "latencyMs": 1562.9,
+    "tokens": 133
+  },
+  {
+    "case": "case-0566",
+    "latencyMs": 1595.1,
+    "tokens": 447
+  },
+  {
+    "case": "case-0567",
+    "latencyMs": 1693.3,
+    "tokens": 459
+  },
+  {
+    "case": "case-0568",
+    "latencyMs": 2372.7,
+    "tokens": 723
+  },
+  {
+    "case": "case-0569",
+    "latencyMs": 793.6,
+    "tokens": 92
+  },
+  {
+    "case": "case-0570",
+    "latencyMs": 804.7,
+    "tokens": 620
+  },
+  {
+    "case": "case-0571",
+    "latencyMs": 2130.2,
+    "tokens": 464
+  },
+  {
+    "case": "case-0572",
+    "latencyMs": 1046.2,
+    "tokens": 825
+  },
+  {
+    "case": "case-0573",
+    "latencyMs": 2392.2,
+    "tokens": 412
+  },
+  {
+    "case": "case-0574",
+    "latencyMs": 1575.2,
+    "tokens": 440
+  },
+  {
+    "case": "case-0575",
+    "latencyMs": 1769.0,
+    "tokens": 248
+  },
+  {
+    "case": "case-0576",
+    "latencyMs": 2265.4,
+    "tokens": 484
+  },
+  {
+    "case": "case-0577",
+    "latencyMs": 2171.8,
+    "tokens": 473
+  },
+  {
+    "case": "case-0578",
+    "latencyMs": 343.4,
+    "tokens": 132
+  },
+  {
+    "case": "case-0579",
+    "latencyMs": 1022.4,
+    "tokens": 413
+  },
+  {
+    "case": "case-0580",
+    "latencyMs": 1149.3,
+    "tokens": 206
+  },
+  {
+    "case": "case-0581",
+    "latencyMs": 381.5,
+    "tokens": 92
+  },
+  {
+    "case": "case-0582",
+    "latencyMs": 1359.6,
+    "tokens": 696
+  },
+  {
+    "case": "case-0583",
+    "latencyMs": 1951.0,
+    "tokens": 446
+  },
+  {
+    "case": "case-0584",
+    "latencyMs": 286.6,
+    "tokens": 677
+  },
+  {
+    "case": "case-0585",
+    "latencyMs": 2231.2,
+    "tokens": 794
+  },
+  {
+    "case": "case-0586",
+    "latencyMs": 1250.4,
+    "tokens": 189
+  },
+  {
+    "case": "case-0587",
+    "latencyMs": 887.2,
+    "tokens": 205
+  },
+  {
+    "case": "case-0588",
+    "latencyMs": 1289.1,
+    "tokens": 108
+  },
+  {
+    "case": "case-0589",
+    "latencyMs": 332.4,
+    "tokens": 542
+  },
+  {
+    "case": "case-0590",
+    "latencyMs": 1828.2,
+    "tokens": 851
+  },
+  {
+    "case": "case-0591",
+    "latencyMs": 2323.2,
+    "tokens": 242
+  },
+  {
+    "case": "case-0592",
+    "latencyMs": 779.7,
+    "tokens": 897
+  },
+  {
+    "case": "case-0593",
+    "latencyMs": 2267.9,
+    "tokens": 534
+  },
+  {
+    "case": "case-0594",
+    "latencyMs": 809.7,
+    "tokens": 662
+  },
+  {
+    "case": "case-0595",
+    "latencyMs": 2228.7,
+    "tokens": 437
+  },
+  {
+    "case": "case-0596",
+    "latencyMs": 280.2,
+    "tokens": 769
+  },
+  {
+    "case": "case-0597",
+    "latencyMs": 1519.2,
+    "tokens": 884
+  },
+  {
+    "case": "case-0598",
+    "latencyMs": 2147.4,
+    "tokens": 695
+  },
+  {
+    "case": "case-0599",
+    "latencyMs": 1903.1,
+    "tokens": 267
+  },
+  {
+    "case": "case-0600",
+    "latencyMs": 1520.8,
+    "tokens": 669
+  },
+  {
+    "case": "case-0601",
+    "latencyMs": 2043.5,
+    "tokens": 889
+  },
+  {
+    "case": "case-0602",
+    "latencyMs": 1177.3,
+    "tokens": 618
+  },
+  {
+    "case": "case-0603",
+    "latencyMs": 586.1,
+    "tokens": 449
+  },
+  {
+    "case": "case-0604",
+    "latencyMs": 2257.4,
+    "tokens": 200
+  },
+  {
+    "case": "case-0605",
+    "latencyMs": 969.9,
+    "tokens": 166
+  },
+  {
+    "case": "case-0606",
+    "latencyMs": 426.8,
+    "tokens": 782
+  },
+  {
+    "case": "case-0607",
+    "latencyMs": 1972.3,
+    "tokens": 237
+  },
+  {
+    "case": "case-0608",
+    "latencyMs": 175.3,
+    "tokens": 615
+  },
+  {
+    "case": "case-0609",
+    "latencyMs": 2034.6,
+    "tokens": 728
+  },
+  {
+    "case": "case-0610",
+    "latencyMs": 168.5,
+    "tokens": 898
+  },
+  {
+    "case": "case-0611",
+    "latencyMs": 832.2,
+    "tokens": 439
+  },
+  {
+    "case": "case-0612",
+    "latencyMs": 1470.9,
+    "tokens": 603
+  },
+  {
+    "case": "case-0613",
+    "latencyMs": 2049.7,
+    "tokens": 836
+  },
+  {
+    "case": "case-0614",
+    "latencyMs": 790.4,
+    "tokens": 470
+  },
+  {
+    "case": "case-0615",
+    "latencyMs": 795.1,
+    "tokens": 295
+  },
+  {
+    "case": "case-0616",
+    "latencyMs": 1067.7,
+    "tokens": 714
+  },
+  {
+    "case": "case-0617",
+    "latencyMs": 932.5,
+    "tokens": 555
+  },
+  {
+    "case": "case-0618",
+    "latencyMs": 1097.0,
+    "tokens": 63
+  },
+  {
+    "case": "case-0619",
+    "latencyMs": 88.1,
+    "tokens": 541
+  },
+  {
+    "case": "case-0620",
+    "latencyMs": 1159.4,
+    "tokens": 497
+  },
+  {
+    "case": "case-0621",
+    "latencyMs": 1851.5,
+    "tokens": 838
+  },
+  {
+    "case": "case-0622",
+    "latencyMs": 1980.0,
+    "tokens": 896
+  },
+  {
+    "case": "case-0623",
+    "latencyMs": 496.6,
+    "tokens": 524
+  },
+  {
+    "case": "case-0624",
+    "latencyMs": 1008.8,
+    "tokens": 108
+  },
+  {
+    "case": "case-0625",
+    "latencyMs": 378.0,
+    "tokens": 480
+  },
+  {
+    "case": "case-0626",
+    "latencyMs": 927.6,
+    "tokens": 861
+  },
+  {
+    "case": "case-0627",
+    "latencyMs": 1105.4,
+    "tokens": 562
+  },
+  {
+    "case": "case-0628",
+    "latencyMs": 1604.5,
+    "tokens": 81
+  },
+  {
+    "case": "case-0629",
+    "latencyMs": 1556.5,
+    "tokens": 124
+  },
+  {
+    "case": "case-0630",
+    "latencyMs": 2219.3,
+    "tokens": 361
+  },
+  {
+    "case": "case-0631",
+    "latencyMs": 1884.1,
+    "tokens": 563
+  },
+  {
+    "case": "case-0632",
+    "latencyMs": 265.5,
+    "tokens": 810
+  },
+  {
+    "case": "case-0633",
+    "latencyMs": 1249.1,
+    "tokens": 426
+  },
+  {
+    "case": "case-0634",
+    "latencyMs": 1594.4,
+    "tokens": 843
+  },
+  {
+    "case": "case-0635",
+    "latencyMs": 396.0,
+    "tokens": 107
+  },
+  {
+    "case": "case-0636",
+    "latencyMs": 2391.0,
+    "tokens": 789
+  },
+  {
+    "case": "case-0637",
+    "latencyMs": 1686.7,
+    "tokens": 152
+  },
+  {
+    "case": "case-0638",
+    "latencyMs": 529.4,
+    "tokens": 543
+  },
+  {
+    "case": "case-0639",
+    "latencyMs": 747.9,
+    "tokens": 870
+  },
+  {
+    "case": "case-0640",
+    "latencyMs": 2205.2,
+    "tokens": 209
+  },
+  {
+    "case": "case-0641",
+    "latencyMs": 1671.8,
+    "tokens": 778
+  },
+  {
+    "case": "case-0642",
+    "latencyMs": 2239.0,
+    "tokens": 107
+  },
+  {
+    "case": "case-0643",
+    "latencyMs": 2012.6,
+    "tokens": 665
+  },
+  {
+    "case": "case-0644",
+    "latencyMs": 1834.3,
+    "tokens": 202
+  },
+  {
+    "case": "case-0645",
+    "latencyMs": 831.3,
+    "tokens": 668
+  },
+  {
+    "case": "case-0646",
+    "latencyMs": 718.0,
+    "tokens": 875
+  },
+  {
+    "case": "case-0647",
+    "latencyMs": 1138.9,
+    "tokens": 300
+  },
+  {
+    "case": "case-0648",
+    "latencyMs": 1245.1,
+    "tokens": 531
+  },
+  {
+    "case": "case-0649",
+    "latencyMs": 563.3,
+    "tokens": 309
+  },
+  {
+    "case": "case-0650",
+    "latencyMs": 1508.8,
+    "tokens": 283
+  },
+  {
+    "case": "case-0651",
+    "latencyMs": 820.3,
+    "tokens": 77
+  },
+  {
+    "case": "case-0652",
+    "latencyMs": 541.5,
+    "tokens": 453
+  },
+  {
+    "case": "case-0653",
+    "latencyMs": 454.1,
+    "tokens": 324
+  },
+  {
+    "case": "case-0654",
+    "latencyMs": 1656.9,
+    "tokens": 425
+  },
+  {
+    "case": "case-0655",
+    "latencyMs": 471.5,
+    "tokens": 843
+  },
+  {
+    "case": "case-0656",
+    "latencyMs": 693.3,
+    "tokens": 826
+  },
+  {
+    "case": "case-0657",
+    "latencyMs": 1311.3,
+    "tokens": 691
+  },
+  {
+    "case": "case-0658",
+    "latencyMs": 2071.2,
+    "tokens": 503
+  },
+  {
+    "case": "case-0659",
+    "latencyMs": 1368.0,
+    "tokens": 633
+  },
+  {
+    "case": "case-0660",
+    "latencyMs": 1677.9,
+    "tokens": 147
+  },
+  {
+    "case": "case-0661",
+    "latencyMs": 664.7,
+    "tokens": 588
+  },
+  {
+    "case": "case-0662",
+    "latencyMs": 1541.1,
+    "tokens": 443
+  },
+  {
+    "case": "case-0663",
+    "latencyMs": 1792.0,
+    "tokens": 420
+  },
+  {
+    "case": "case-0664",
+    "latencyMs": 694.2,
+    "tokens": 417
+  },
+  {
+    "case": "case-0665",
+    "latencyMs": 1419.5,
+    "tokens": 408
+  },
+  {
+    "case": "case-0666",
+    "latencyMs": 847.5,
+    "tokens": 123
+  },
+  {
+    "case": "case-0667",
+    "latencyMs": 1106.1,
+    "tokens": 220
+  },
+  {
+    "case": "case-0668",
+    "latencyMs": 1507.7,
+    "tokens": 89
+  },
+  {
+    "case": "case-0669",
+    "latencyMs": 767.6,
+    "tokens": 568
+  },
+  {
+    "case": "case-0670",
+    "latencyMs": 668.5,
+    "tokens": 694
+  },
+  {
+    "case": "case-0671",
+    "latencyMs": 2321.0,
+    "tokens": 639
+  },
+  {
+    "case": "case-0672",
+    "latencyMs": 2234.0,
+    "tokens": 360
+  },
+  {
+    "case": "case-0673",
+    "latencyMs": 1780.6,
+    "tokens": 805
+  },
+  {
+    "case": "case-0674",
+    "latencyMs": 158.4,
+    "tokens": 192
+  },
+  {
+    "case": "case-0675",
+    "latencyMs": 755.1,
+    "tokens": 680
+  },
+  {
+    "case": "case-0676",
+    "latencyMs": 1082.8,
+    "tokens": 564
+  },
+  {
+    "case": "case-0677",
+    "latencyMs": 924.7,
+    "tokens": 88
+  },
+  {
+    "case": "case-0678",
+    "latencyMs": 386.3,
+    "tokens": 272
+  },
+  {
+    "case": "case-0679",
+    "latencyMs": 1501.0,
+    "tokens": 86
+  },
+  {
+    "case": "case-0680",
+    "latencyMs": 131.7,
+    "tokens": 42
+  },
+  {
+    "case": "case-0681",
+    "latencyMs": 1395.7,
+    "tokens": 351
+  },
+  {
+    "case": "case-0682",
+    "latencyMs": 326.8,
+    "tokens": 405
+  },
+  {
+    "case": "case-0683",
+    "latencyMs": 1319.1,
+    "tokens": 463
+  },
+  {
+    "case": "case-0684",
+    "latencyMs": 1433.9,
+    "tokens": 643
+  },
+  {
+    "case": "case-0685",
+    "latencyMs": 390.2,
+    "tokens": 415
+  },
+  {
+    "case": "case-0686",
+    "latencyMs": 1527.5,
+    "tokens": 526
+  },
+  {
+    "case": "case-0687",
+    "latencyMs": 448.0,
+    "tokens": 54
+  },
+  {
+    "case": "case-0688",
+    "latencyMs": 2252.9,
+    "tokens": 289
+  },
+  {
+    "case": "case-0689",
+    "latencyMs": 1721.3,
+    "tokens": 501
+  },
+  {
+    "case": "case-0690",
+    "latencyMs": 302.3,
+    "tokens": 693
+  },
+  {
+    "case": "case-0691",
+    "latencyMs": 415.7,
+    "tokens": 721
+  },
+  {
+    "case": "case-0692",
+    "latencyMs": 1894.6,
+    "tokens": 451
+  },
+  {
+    "case": "case-0693",
+    "latencyMs": 1962.8,
+    "tokens": 51
+  },
+  {
+    "case": "case-0694",
+    "latencyMs": 210.2,
+    "tokens": 880
+  },
+  {
+    "case": "case-0695",
+    "latencyMs": 1384.6,
+    "tokens": 398
+  },
+  {
+    "case": "case-0696",
+    "latencyMs": 1459.8,
+    "tokens": 632
+  },
+  {
+    "case": "case-0697",
+    "latencyMs": 1109.5,
+    "tokens": 570
+  },
+  {
+    "case": "case-0698",
+    "latencyMs": 1781.8,
+    "tokens": 294
+  },
+  {
+    "case": "case-0699",
+    "latencyMs": 463.0,
+    "tokens": 40
+  }
+]
