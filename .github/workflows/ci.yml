@@ -26,4 +26,28 @@ jobs:
 
       - run: pnpm typecheck
 
-      - run: pnpm test
+      - name: Test
+        shell: bash
+        run: pnpm test 2>&1 | tee "$RUNNER_TEMP/failing.txt"
+
+      - name: Upload failing test output for ci-fix
+        if: failure() && matrix.node-version == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: failing-output
+          path: ${{ runner.temp }}/failing.txt
+
+  # Agent-suggested fixes when tests fail on a PR. Comment-only: the agent
+  # never pushes and has no write access to code. The needs + if: failure()
+  # pattern cannot retrigger itself — keep it that way (no workflow_run).
+  ci-fix:
+    needs: test
+    if: failure() && github.event_name == 'pull_request'
+    uses: ruanmartinelli/flue-ci/.github/workflows/fix.yml@main
+    permissions:
+      contents: read
+      pull-requests: write
+    with:
+      test-command: pnpm test
+      install-command: pnpm install --frozen-lockfile
+    secrets: inherit
