@@ -2,6 +2,7 @@
 
 export { evaluate } from "./evaluate.js";
 export { scorer } from "./scorer.js";
+export { llmJudge } from "./judge.js";
 
 export { aggregate } from "./aggregate.js";
 export { loadBaseline, gate } from "./gate.js";
