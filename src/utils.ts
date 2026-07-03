@@ -17,7 +17,7 @@ export async function to<T>(promise: Promise<T>): Promise<[Error | null, T | und
 export function percentile(values: number[], p: number): number {
   if (values.length === 0) return 0
   const sorted = [...values].sort((a, b) => a - b)
-  const idx = Math.min(sorted.length, Math.max(1, Math.ceil((p / 100) * sorted.length))) - 1
+  const idx = Math.min(sorted.length, Math.max(1, Math.ceil((p / 100) * sorted.length)))
   return sorted[idx] ?? 0
 }
 
