@@ -26,7 +26,7 @@ const zip = scorer<string, Address, Partial<Address>>('zip', ({ output, expected
 })
 ```
 
-The score value is a number in [0,1], a `{ score, reason }` object, or `null` to skip the case (not applicable).
+The score value is a number in [0,1], a `{ score, reason }` object, or `null` when the scorer is not applicable to that case — a `null` score is excluded from the case's weighted mean.
 
 ### 2. Create a task
 
@@ -76,7 +76,7 @@ const report = await evaluate<string, Address, Partial<Address>>('extraction', {
   ],
 })
 
-console.log(report) // { byModel: { 'openai/gpt-4o-mini': { ... } }
+console.log(report) // { name: 'extraction', byModel: { 'openai/gpt-4o-mini': { ... }, ... } }
 ```
 
 ## API
@@ -109,7 +109,7 @@ scorer<I, O, E>(name: string, run, opts?: { weight?: number }): Scorer<I, O, E>
 | param         | type                                          | notes                                                                |
 | ------------- | --------------------------------------------- | -------------------------------------------------------------------- |
 | `name`        | `string`                                      | scorer name, shown in the report                                     |
-| `run`         | `(ctx) => ScoreValue \| Promise<ScoreValue>`  | scores one case; returns a number in [0,1], `{ score, reason }`, or `null` to skip |
+| `run`         | `(ctx) => ScoreValue \| Promise<ScoreValue>`  | scores one case; returns a number in [0,1], `{ score, reason }`, or `null` when not applicable |
 | `opts.weight` | `number`                                      | optional; relative weight in the case mean (default 1)               |
 
 A scorer that calls a model is a judge: report its usage to count it as judge spend.
