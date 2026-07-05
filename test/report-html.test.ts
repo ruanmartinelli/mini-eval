@@ -79,6 +79,12 @@ describe('renderHtml', () => {
     expect(html).toContain('width:0.0%')
   })
 
+  it('shows p50 latency per model, with p95 in the hover title', () => {
+    const html = renderHtml(report({ m1: modelReport({ latency: { p50Ms: 319.6, p95Ms: 1234 } }) }))
+    expect(html).toContain('>320 ms<')
+    expect(html).toContain('title="p50 320 ms · p95 1,234 ms"')
+  })
+
   it('sums task and judge cost, and shows a dash when nothing was reported', () => {
     const html = renderHtml(
       report({

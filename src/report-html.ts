@@ -1,5 +1,5 @@
 import type { EvalReport, ModelReport } from './types.js'
-import { escapeHtml, pct, usd } from './utils.js'
+import { escapeHtml, ms, pct, usd } from './utils.js'
 
 function scoreClass(score: number): string {
   if (score >= 0.8) return 's-good'
@@ -18,6 +18,7 @@ function modelRows<O>(byModel: Record<string, ModelReport<O>>): string {
         <span class="bar" style="width:${fill}%"></span>
         <span class="name mono">${escapeHtml(model)}</span>
         <div class="figs">
+          <span class="fig lat" title="p50 ${ms(m.latency.p50Ms)} · p95 ${ms(m.latency.p95Ms)}">${ms(m.latency.p50Ms)}</span>
           <span class="fig cost" title="task ${usd(m.cost.taskUsd)} · judge ${usd(m.cost.judgeUsd)}">${usd(total)}</span>
           <span class="fig score ${scoreClass(m.overall)}">${pct(m.overall)}</span>
         </div>
@@ -101,6 +102,7 @@ const STYLES = `
     .name { position: relative; z-index: 1; flex: 1; min-width: 0; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .figs { position: relative; z-index: 1; display: flex; align-self: stretch; align-items: stretch; gap: 22px; flex-shrink: 0; }
     .fig { display: flex; align-items: center; font-variant-numeric: tabular-nums; }
+    .fig.lat { color: var(--muted); font-size: 13px; }
     .fig.cost { color: var(--muted); font-size: 13px; }
     .fig.score { font-size: 13px; font-weight: 500; }
 
@@ -118,7 +120,8 @@ const STYLES = `
 
 /**
  * Render an {@link EvalReport} as a self-contained HTML page: a per-model summary
- * list (cost and score, each row filled to its score) and a tag × model matrix when present.
+ * list (p50 latency, cost, and score, each row filled to its score) and a
+ * tag × model matrix when present.
  *
  * Pure and dependency-free — it returns the HTML as a string and never touches the
  * filesystem; the caller decides whether to write, serve, or print it.
