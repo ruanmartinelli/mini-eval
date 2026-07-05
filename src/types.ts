@@ -76,6 +76,8 @@ export type CaseResult<O> = {
   tags: string[];
   /** The task output, or `null` if the task threw. */
   output: O | null;
+  /** The task's error message, present only when the task threw. */
+  error?: string;
   /** Weighted mean over applicable (non-`null`) scorers. */
   score: number;
   /** Per-scorer breakdown. */

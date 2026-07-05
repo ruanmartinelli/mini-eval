@@ -5,9 +5,9 @@ import { aggregate } from './aggregate.js'
 import { report } from './usage.js'
 
 /**
- * Sweeps `config.models`, runs the task on each case, scores the output, and
- * aggregates per model. A case whose task throws is recorded with `output: null`
- * and does not abort the run.
+ * Sweeps `config.models` (deduplicated), runs the task on each case, scores the
+ * output, and aggregates per model. A case whose task throws is recorded with
+ * `output: null` and the error message, and does not abort the run.
  *
  * @param name   name for this eval, included in the report.
  * @param config the eval configuration.
@@ -17,8 +17,9 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
   const cases = await (typeof config.data === 'function' ? config.data() : config.data)
   assert(cases && cases.length > 0, 'data is required')
 
-  const models = config.models
-  assert(models && models.length > 0, 'models is required')
+  assert(config.models && config.models.length > 0, 'models is required')
+  // A repeated model id would re-run every case only to overwrite its own entry.
+  const models = [...new Set(config.models)]
 
   const scorers = config.scorers
   assert(scorers && scorers.length > 0, 'scorers is required')
@@ -62,6 +63,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
           score: 0,
           scores: [],
           output: null,
+          error: error.message,
         })
 
         continue
