@@ -98,6 +98,20 @@ describe('evaluate', () => {
     const results = report.byModel.m1?.cases!
     expect(results).toHaveLength(2)
     expect(results.every(c => c.output === null && c.score === 0 && c.scores.length === 0)).toBe(true)
+    expect(results.every(c => c.error === 'task exploded')).toBe(true)
+  })
+
+  it('leaves error unset when the task succeeds', async () => {
+    const report = await evaluate('fine', config({ data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.error).toBeUndefined()
+  })
+
+  it('records a non-Error throw as its string form', async () => {
+    const boom: Task<Input, Output> = async () => {
+      throw 'plain string failure'
+    }
+    const report = await evaluate('boom', config({ task: boom, data: [cases[0]!] }))
+    expect(report.byModel.m1?.cases[0]?.error).toBe('plain string failure')
   })
 
   it('records a thrown scorer as score 0 with the error surfaced, without aborting', async () => {
@@ -248,15 +262,15 @@ describe('evaluate', () => {
     expect(report.byModel.m1?.cases[0]?.score).toBe(2)
   })
 
-  it('runs the task once per duplicate model id but keeps only one report entry (silent overwrite + wasted work)', async () => {
+  it('dedupes repeated model ids instead of re-running and overwriting', async () => {
     let calls = 0
     const counting: Task<Input, Output> = async (input, ctx) => {
       calls++
       return { y: input.x * 2, model: ctx.model }
     }
     const report = await evaluate('dup', config({ task: counting, models: ['m1', 'm1'], data: [cases[0]!] }))
-    expect(Object.keys(report.byModel)).toEqual(['m1']) // the second sweep clobbers the first
-    expect(calls).toBe(2) // ...yet the task still ran twice — duplicate ids should arguably dedupe or throw
+    expect(Object.keys(report.byModel)).toEqual(['m1'])
+    expect(calls).toBe(1)
   })
 
   it('rejects a scorer with a non-positive weight', async () => {
