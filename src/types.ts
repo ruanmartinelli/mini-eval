@@ -64,7 +64,7 @@ export type EvalConfig<I, O, E> = {
   models: string[];
   /** The system under test. */
   task: Task<I, O>;
-  /** Max concurrent cases. Not yet honored; cases run serially. */
+  /** Max concurrent cases within a model. Default 1 (serial). */
   concurrency?: number;
   /** Path to a baseline report for gating. Not yet honored. */
   baseline?: string;

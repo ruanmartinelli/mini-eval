@@ -21,6 +21,26 @@ export function percentile(values: number[], p: number): number {
   return sorted[idx] ?? 0
 }
 
+/**
+ * Map `items` through an async `fn`, running at most `limit` calls at a time.
+ * Results keep the order of `items`. A rejection from `fn` propagates and stops
+ * scheduling new items (in-flight items still settle).
+ */
+export async function mapConcurrent<T, R>(items: T[], limit: number, fn: (item: T, index: number) => Promise<R>): Promise<R[]> {
+  const results = new Array<R>(items.length)
+  let next = 0
+
+  const worker = async () => {
+    while (next < items.length) {
+      const i = next++
+      results[i] = await fn(items[i]!, i)
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(limit, items.length)) }, worker))
+  return results
+}
+
 /** Escape the five characters that are unsafe in HTML text and attributes. */
 export function escapeHtml(value: string): string {
   return value
