@@ -14,9 +14,9 @@ fills the most visible gaps.
 What's still missing shows up the moment you use mini-eval in a real loop —
 "run the eval in CI on every prompt change and fail on regressions":
 
-- A run's output is ephemeral. There's no first-class way to save a report,
-  version it, or diff two of them; `loadBaseline` trusts whatever JSON it
-  reads.
+- A saved report carries no version. `parseReport` (#5) checks the basic
+  shape, but a baseline produced by an older, incompatible report shape
+  would gate against garbage instead of failing loudly.
 - `evaluate` is silent while it runs. A 5-model × 50-case sweep of a slow
   task gives no feedback until it returns.
 - One hung model call hangs the whole eval; one flaky 429 scores a case 0.
@@ -29,36 +29,41 @@ What's still missing shows up the moment you use mini-eval in a real loop —
 
 1. **Tiny.** Zero runtime dependencies; a handful of small files.
 2. **Code-first.** No YAML, no DSL, no magic discovery. The eval is a script.
-3. **Pure core.** `evaluate` and `renderHtml` don't touch the filesystem;
-   the caller owns I/O. Anything that reads/writes disk is a separate,
-   explicitly-named helper (like `loadBaseline` today).
+3. **Pure core — the library never imports `node:fs`.** `evaluate`,
+   `renderHtml`, `gate`, and `parseReport` all work on in-memory values and
+   strings; reading and writing files is entirely the caller's job.
 
 ## Phases
 
-### Phase 1 — report persistence: `saveReport` / `loadReport`
+### Phase 1 — versioned serialization: `serializeReport` + a stricter `parseReport`
 
 The report is the artifact everything else (gating, diffing, history) hangs
-off, so make it durable and versioned:
+off, so make its serialized form versioned — while staying fs-free
+(principle 3); the caller keeps writing and reading the file:
 
 ```ts
-type SavedReport = EvalReport & {
+type SerializedReport = EvalReport & {
   schemaVersion: 1
   savedAt: string        // ISO timestamp
   version: string        // mini-eval version that produced it
 }
 
-saveReport(path: string, report: EvalReport): Promise<void>
-loadReport(path: string): Promise<EvalReport>   // validates schemaVersion + shape
+serializeReport(report: EvalReport, opts?: { slim?: boolean }): string
+// parseReport learns to check schemaVersion when present (and stays
+// lenient about a bare EvalReport, for hand-rolled baselines)
 ```
 
-- `loadBaseline` becomes an alias for `loadReport` (kept for the gating
-  vocabulary; both stay exported).
+```ts
+writeFileSync('baseline.json', serializeReport(report))
+const baseline = parseReport(readFileSync('baseline.json', 'utf8'))
+```
+
 - `schemaVersion` lets future shape changes fail loudly instead of gating
   against garbage.
-- Case outputs can be large; `saveReport` takes an option to strip `output`
-  from cases (`{ slim: true }`), keeping scores/reasons/usage.
+- Case outputs can be large; `{ slim: true }` strips `output` from cases,
+  keeping scores/reasons/usage.
 
-Small, pure-ish (one `readFile`/`writeFile` each), unblocks everything below.
+Small, fully pure, unblocks everything below.
 
 ### Phase 2 — retire `EvalConfig.baseline`
 
@@ -72,7 +77,8 @@ Two options for the accepted-but-ignored `baseline` option:
 
   ```ts
   const report = await evaluate('extraction', config)
-  const { ok, regressions } = gate(report, await loadBaseline('baseline.json'), { tolerance: 0.02 })
+  const baseline = parseReport(readFileSync('baseline.json', 'utf8'))
+  const { ok, regressions } = gate(report, baseline, { tolerance: 0.02 })
   if (!ok) { console.error(regressions.join('\n')); process.exit(1) }
   ```
 
@@ -146,7 +152,7 @@ zero dependencies.
 
 | phase | change                        | size | depends on |
 | ----- | ----------------------------- | ---- | ---------- |
-| 1     | saveReport / loadReport       | S    | —          |
+| 1     | serializeReport + versioned parseReport | S | #5     |
 | 2     | retire `config.baseline`      | XS   | 1          |
 | 3     | `onProgress` hook             | S    | —          |
 | 4     | `timeoutMs` / `retries`       | M    | —          |
