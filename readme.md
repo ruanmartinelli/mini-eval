@@ -114,6 +114,40 @@ scorer<I, O, E>(name: string, run, opts?: { weight?: number }): Scorer<I, O, E>
 
 A scorer that calls a model is a judge: report its usage to count it as judge spend.
 
+### `gate(report, baseline, opts?)`
+
+Compares a fresh report against a baseline and lists regressions: baseline models whose overall score dropped (or went missing). Models that are new in the fresh report are ignored.
+
+```ts
+gate(report: EvalReport, baseline: EvalReport, opts?: { byTag?: boolean; tolerance?: number }): { ok: boolean; regressions: string[] }
+```
+
+| option           | type      | notes                                                            |
+| ---------------- | --------- | ---------------------------------------------------------------- |
+| `opts.byTag`     | `boolean` | optional; also gate each baseline model's per-tag scores          |
+| `opts.tolerance` | `number`  | optional; forgive drops of at most this much (default 0)          |
+
+### `loadBaseline(path)`
+
+Reads a saved report (JSON) from disk, for use as the `gate` baseline.
+
+```ts
+import { evaluate, gate, loadBaseline } from 'mini-eval'
+import { writeFileSync } from 'node:fs'
+
+const report = await evaluate('extraction', { /* ... */ })
+
+const baseline = await loadBaseline('baseline.json')
+const { ok, regressions } = gate(report, baseline, { byTag: true, tolerance: 0.02 })
+if (!ok) {
+  console.error(regressions.join('\n'))
+  process.exit(1)
+}
+
+// promote the fresh report to be the next baseline
+writeFileSync('baseline.json', JSON.stringify(report))
+```
+
 ### `renderHtml(report)`
 
 Renders a report as a self-contained HTML page. Returns the HTML as a string.
