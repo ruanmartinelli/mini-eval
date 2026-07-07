@@ -1,8 +1,5 @@
-import { mkdtemp, writeFile } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
-import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { gate, loadBaseline } from '../src/gate.js'
+import { gate, parseReport } from '../src/gate.js'
 import type { EvalReport, ModelReport } from '../src/types.js'
 
 /** Build a ModelReport with the given scores; everything else zeroed. */
@@ -20,32 +17,27 @@ function report(byModel: EvalReport['byModel'], name = 'x'): EvalReport {
   return { name, byModel }
 }
 
-describe('loadBaseline', () => {
-  async function tempReport(contents: string): Promise<string> {
-    const dir = await mkdtemp(join(tmpdir(), 'mini-eval-'))
-    const path = join(dir, 'report.json')
-    await writeFile(path, contents)
-    return path
-  }
-
-  it('parses a saved report from disk', async () => {
+describe('parseReport', () => {
+  it('round-trips a report through JSON.stringify', () => {
     const saved = report({ m1: model(0.8, { a: 0.9 }) }, 'extraction')
-    const path = await tempReport(JSON.stringify(saved))
-    await expect(loadBaseline(path)).resolves.toEqual(saved)
+    expect(parseReport(JSON.stringify(saved))).toEqual(saved)
   })
 
-  it('rejects when the file is missing', async () => {
-    await expect(loadBaseline(join(tmpdir(), 'mini-eval-does-not-exist.json'))).rejects.toThrow()
+  it('accepts an already-parsed value', () => {
+    const saved = report({ m1: model(0.8) })
+    expect(parseReport(JSON.parse(JSON.stringify(saved)))).toEqual(saved)
   })
 
-  it('rejects invalid JSON with the path in the message', async () => {
-    const path = await tempReport('not json')
-    await expect(loadBaseline(path)).rejects.toThrow(/not valid JSON/)
+  it('throws on invalid JSON', () => {
+    expect(() => parseReport('not json')).toThrow(/not valid JSON/)
   })
 
-  it('rejects JSON that is not shaped like a report', async () => {
-    const path = await tempReport(JSON.stringify({ nope: true }))
-    await expect(loadBaseline(path)).rejects.toThrow(/not an eval report/)
+  it('throws on a JSON string not shaped like a report', () => {
+    expect(() => parseReport(JSON.stringify({ nope: true }))).toThrow(/not an eval report/)
+  })
+
+  it.each([null, 42, { name: 7, byModel: {} }, { name: 'x' }])('throws on a malformed parsed value (%j)', value => {
+    expect(() => parseReport(value)).toThrow(/not an eval report/)
   })
 })
 

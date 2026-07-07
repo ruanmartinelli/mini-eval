@@ -127,17 +127,17 @@ gate(report: EvalReport, baseline: EvalReport, opts?: { byTag?: boolean; toleran
 | `opts.byTag`     | `boolean` | optional; also gate each baseline model's per-tag scores          |
 | `opts.tolerance` | `number`  | optional; forgive drops of at most this much (default 0)          |
 
-### `loadBaseline(path)`
+### `parseReport(source)`
 
-Reads a saved report (JSON) from disk, for use as the `gate` baseline.
+Parses and validates a serialized report — a JSON string or an already-parsed value. Pure: mini-eval never touches the filesystem, so you read the baseline and it checks the shape.
 
 ```ts
-import { evaluate, gate, loadBaseline } from 'mini-eval'
-import { writeFileSync } from 'node:fs'
+import { evaluate, gate, parseReport } from 'mini-eval'
+import { readFileSync, writeFileSync } from 'node:fs'
 
 const report = await evaluate('extraction', { /* ... */ })
 
-const baseline = await loadBaseline('baseline.json')
+const baseline = parseReport(readFileSync('baseline.json', 'utf8'))
 const { ok, regressions } = gate(report, baseline, { byTag: true, tolerance: 0.02 })
 if (!ok) {
   console.error(regressions.join('\n'))

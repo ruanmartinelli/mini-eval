@@ -1,31 +1,34 @@
 import assert from 'node:assert'
-import { readFile } from 'node:fs/promises'
 import type { EvalReport } from './types.js'
 
 /**
- * Read and parse a saved {@link EvalReport} from `path`, for use as a gating
- * baseline. The file is expected to be the JSON serialization of a report
- * returned by `evaluate` (e.g. written with `JSON.stringify`).
+ * Parse and validate a serialized {@link EvalReport}, e.g. one read from a
+ * baseline file. Accepts a JSON string or an already-parsed value and checks
+ * the basic `{ name, byModel }` shape.
  *
- * @param path filesystem path to a saved report.
- * @returns the parsed report.
- * @throws when the file is missing, is not valid JSON, or does not look like a report.
+ * Pure — it never touches the filesystem; the caller owns I/O:
+ * `parseReport(readFileSync('baseline.json', 'utf8'))`.
+ *
+ * @param source a JSON string, or a value already parsed from one.
+ * @returns the validated report.
+ * @throws when the string is not valid JSON or the value is not shaped like a report.
  */
-export async function loadBaseline(path: string): Promise<EvalReport> {
-  const raw = await readFile(path, 'utf8')
+export function parseReport(source: string | unknown): EvalReport {
+  let value: unknown = source
 
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(raw)
-  } catch (err) {
-    throw new Error(`baseline at ${path} is not valid JSON: ${err instanceof Error ? err.message : String(err)}`)
+  if (typeof source === 'string') {
+    try {
+      value = JSON.parse(source)
+    } catch (err) {
+      throw new Error(`report is not valid JSON: ${err instanceof Error ? err.message : String(err)}`)
+    }
   }
 
-  const report = parsed as EvalReport
+  const report = value as EvalReport
   const shapeOk =
     typeof report === 'object' && report !== null && typeof report.name === 'string' && typeof report.byModel === 'object' && report.byModel !== null
 
-  assert(shapeOk, `baseline at ${path} is not an eval report (expected { name, byModel })`)
+  assert(shapeOk, 'not an eval report (expected { name, byModel })')
 
   return report
 }
