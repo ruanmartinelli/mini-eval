@@ -51,5 +51,8 @@
     "trailingComma": "all",
     "arrowParens": "avoid",
     "semi": false
+  },
+  "dependencies": {
+    "p-map": "^7.0.5"
   }
 }

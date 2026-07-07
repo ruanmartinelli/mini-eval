@@ -1,6 +1,7 @@
 import assert from 'node:assert'
+import pMap from 'p-map'
 import type { Case, CaseResult, EvalConfig, EvalReport, Usage } from './types.js'
-import { mapConcurrent, to } from './utils.js'
+import { to } from './utils.js'
 import { aggregate } from './aggregate.js'
 import { report } from './usage.js'
 
@@ -37,7 +38,7 @@ export async function evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E
   const byModel: EvalReport<O>['byModel'] = {}
 
   for (const model of models) {
-    const results = await mapConcurrent(cases, concurrency, c => runCase(c, model, task, scorers))
+    const results = await pMap(cases, c => runCase(c, model, task, scorers), { concurrency })
     byModel[model] = aggregate(results)
   }
 

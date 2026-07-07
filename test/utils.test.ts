@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { escapeHtml, mapConcurrent, ms, pct, percentile, to, usd } from '../src/utils.js'
+import { escapeHtml, ms, pct, percentile, to, usd } from '../src/utils.js'
 
 describe('to', () => {
   it('returns [null, result] on success', async () => {
@@ -20,46 +20,6 @@ describe('to', () => {
     expect(err).toBeInstanceOf(Error)
     expect(err?.message).toBe('nope')
     expect(result).toBeUndefined()
-  })
-})
-
-describe('mapConcurrent', () => {
-  it('maps every item and preserves input order', async () => {
-    const result = await mapConcurrent([3, 1, 2], 2, async n => {
-      await new Promise(resolve => setTimeout(resolve, n))
-      return n * 10
-    })
-    expect(result).toEqual([30, 10, 20])
-  })
-
-  it('never exceeds the concurrency limit', async () => {
-    let inFlight = 0
-    let max = 0
-    await mapConcurrent([1, 2, 3, 4, 5], 2, async () => {
-      inFlight++
-      max = Math.max(max, inFlight)
-      await new Promise(resolve => setTimeout(resolve, 5))
-      inFlight--
-    })
-    expect(max).toBe(2)
-  })
-
-  it('passes the item index to the callback', async () => {
-    const result = await mapConcurrent(['a', 'b'], 1, async (item, i) => `${item}${i}`)
-    expect(result).toEqual(['a0', 'b1'])
-  })
-
-  it('resolves to [] for an empty list', async () => {
-    await expect(mapConcurrent([], 4, async () => 1)).resolves.toEqual([])
-  })
-
-  it('propagates a rejection from the callback', async () => {
-    await expect(
-      mapConcurrent([1, 2], 2, async n => {
-        if (n === 2) throw new Error('boom')
-        return n
-      }),
-    ).rejects.toThrow('boom')
   })
 })
 
