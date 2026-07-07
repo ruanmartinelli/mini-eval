@@ -95,7 +95,7 @@ evaluate<I, O, E>(name: string, config: EvalConfig<I, O, E>): Promise<EvalReport
 | `scorers`     | `Scorer<I, O, E>[]`                       | one or more scorers                |
 | `models`      | `string[]`                                | models to sweep; at least one      |
 | `task`        | `Task<I, O>`                              | the system under test              |
-| `concurrency` | `number`                                  | optional; accepted, not yet honored |
+| `concurrency` | `number`                                  | optional; max concurrent cases per model (default 1, serial) |
 | `baseline`    | `string`                                  | optional; accepted, not yet honored |
 
 ### `scorer(name, run, opts?)`

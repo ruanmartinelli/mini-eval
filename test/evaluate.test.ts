@@ -259,6 +259,56 @@ describe('evaluate', () => {
     expect(calls).toBe(2) // ...yet the task still ran twice — duplicate ids should arguably dedupe or throw
   })
 
+  describe('concurrency', () => {
+    /** A task that tracks how many invocations are in flight at once. */
+    function trackingTask() {
+      let inFlight = 0
+      let maxInFlight = 0
+      const task: Task<Input, Output> = async (input, ctx) => {
+        inFlight++
+        maxInFlight = Math.max(maxInFlight, inFlight)
+        await new Promise(resolve => setTimeout(resolve, 5))
+        inFlight--
+        return { y: input.x * 2, model: ctx.model }
+      }
+      return { task, max: () => maxInFlight }
+    }
+
+    const fourCases: Case<Input, Expected>[] = [1, 2, 3, 4].map(x => ({ input: { x }, expected: { y: x * 2 } }))
+
+    it('runs cases serially by default', async () => {
+      const { task, max } = trackingTask()
+      await evaluate('serial', config({ task, data: fourCases }))
+      expect(max()).toBe(1)
+    })
+
+    it('runs up to `concurrency` cases at once within a model', async () => {
+      const { task, max } = trackingTask()
+      await evaluate('pool', config({ task, data: fourCases, concurrency: 2 }))
+      expect(max()).toBe(2)
+    })
+
+    it('keeps results in case order regardless of completion order', async () => {
+      const slowFirst: Task<Input, Output> = async (input, ctx) => {
+        // the first case finishes last
+        await new Promise(resolve => setTimeout(resolve, input.x === 1 ? 20 : 1))
+        return { y: input.x * 2, model: ctx.model }
+      }
+      const report = await evaluate('order', config({ task: slowFirst, data: fourCases, concurrency: 4 }))
+      expect(report.byModel.m1?.cases.map(c => c.output?.y)).toEqual([2, 4, 6, 8])
+    })
+
+    it('scores concurrent cases exactly as serial runs do', async () => {
+      const report = await evaluate('same', config({ data: fourCases, concurrency: 3 }))
+      expect(report.byModel.m1?.overall).toBe(1)
+      expect(report.byModel.m1?.cases).toHaveLength(4)
+    })
+
+    it.each([0, -1, 1.5])('rejects a non-positive or fractional concurrency (%s)', async value => {
+      await expect(evaluate('bad', config({ concurrency: value }))).rejects.toThrow('concurrency must be a positive integer')
+    })
+  })
+
   it('rejects a scorer with a non-positive weight', async () => {
     const zero: Scorer<Input, Output, Expected> = { name: 'zero', weight: 0, run: () => 1 }
     await expect(evaluate('w0', config({ scorers: [zero], data: [cases[0]!] }))).rejects.toThrow('weight must be > 0')
